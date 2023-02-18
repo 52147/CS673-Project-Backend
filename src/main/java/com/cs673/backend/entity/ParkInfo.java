@@ -2,14 +2,22 @@ package com.cs673.backend.entity;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-@Component
+@Entity
 public class ParkInfo implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int parkNum;
+    @Column(nullable = true)
     private String cardNum;
+    @Column(nullable = false)
     private String plate;
+    @Column(nullable = false)
     private Date entrance;
 
     public int getId() {

@@ -1,6 +1,5 @@
 package com.cs673.backend.service;
 
-import com.cs673.backend.DAO.ParkInfoDao;
 import com.cs673.backend.DTO.FormData;
 import com.cs673.backend.entity.ParkInfo;
 import org.springframework.beans.factory.annotation.Autowired;

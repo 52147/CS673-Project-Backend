@@ -17,8 +17,8 @@ public class CheckController {
     @PostMapping
     @CrossOrigin(origins = "http://localhost:3000")
     public Msg checkIn(@RequestBody FormData data) {
-        parkinfoservice.saveParkInfo(data);
         System.out.println(data);
+
         return Msg.success();
     }
 }
