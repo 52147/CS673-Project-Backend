@@ -15,11 +15,11 @@ public class CheckController {
     @Autowired
     private ParkInfoService parkinfoservice;
     @PostMapping
-    @RequestMapping("/index/checkIn")
+    @RequestMapping("/index/check/checkIn")
     @CrossOrigin(origins = "http://localhost:3000")
     public Msg checkIn(@RequestBody ParkInfo data) {
         System.out.println(data);
-        /*parkinfoservice.saveParkInfo(data);*/
+        parkinfoservice.saveParkInfo(data);
         return Msg.success();
     }
 }

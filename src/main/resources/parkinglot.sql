@@ -43,8 +43,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES ('0', 'admin', 
 DROP TABLE IF EXISTS `parkinfo`;
 CREATE TABLE `parkinfo` (
     `id` int(11) NOT NULL auto_increment,
-    `parkNum` int(11) default NULL,
-    `cardNum` varchar(50) default NULL,
+    `park_num` int(11) default NULL,
+    `card_num` varchar(50) default NULL,
     `plate` varchar(50) default NULL ,
     `entrance` datetime default NULL,
     PRIMARY KEY  (`id`)

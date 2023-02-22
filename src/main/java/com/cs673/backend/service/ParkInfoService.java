@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 public interface ParkInfoService {
-    public void saveParkInfo(FormData data);
+    public void saveParkInfo(ParkInfo data);
     public ParkInfo findParkInfoByParknum(int parkNum);
     public void deleteParkInfoByParkNum(int parkNum);
 }

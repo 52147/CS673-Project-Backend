@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 @Entity
+@Table(name = "parkinfo")
 public class ParkInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
