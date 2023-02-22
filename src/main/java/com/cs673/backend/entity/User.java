@@ -13,7 +13,9 @@ public class User implements Serializable {
     private String password;
     @Column
     private int role;
+    @Transient
     private int cardId;
+    @Transient
     private String cardNum;
 
     public Integer getId() {
