@@ -1,13 +1,16 @@
 package com.cs673.backend.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ParkSlot implements Serializable {
     private Integer id;
     private int parkId;
     /** empty: 0, occupied: 1**/
     private int status;
+    /** Normal: 0 Priority Parking(Disabilities): 1**/
     private int tag;
+
 
     public Integer getId() {
         return id;
@@ -40,4 +43,5 @@ public class ParkSlot implements Serializable {
     public void setTag(int tag) {
         this.tag = tag;
     }
+
 }

@@ -14,7 +14,6 @@ public class LoginController {
     @GetMapping
     public List<ParkSlot> getallparking() {
         ParkSlot park1 = new ParkSlot();
-        park1.setId(1);
         List<ParkSlot> lst = new ArrayList<ParkSlot>();
         lst.add(park1);
         return lst;
