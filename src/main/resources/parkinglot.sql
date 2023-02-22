@@ -23,19 +23,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int(11) NOT NULL auto_increment,
-  `username` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  'role' int(11) default '3' COMMENT '1: superadmin, 2: admin, 3: user',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+    `id` int(11) NOT NULL auto_increment,
+    `username` varchar(255) default NULL,
+    `password` varchar(255) default NULL,
+    `role` int(11) default 3 COMMENT '1: super admin, 2: admin, 3: user',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` ('id', 'username', 'password', 'role') VALUES ('0', 'admin', 'admin', '1');
-COMMIT;
+INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES ('0', 'admin', 'admin', 1);
 
 -- ----------------------------
 -- Table structure for `parkinfo`
@@ -54,4 +54,3 @@ CREATE TABLE `parkinfo` (
 -- Records of parkinfo
 -- ----------------------------
 
-SET FOREIGN_KEY_CHECKS = 1;
