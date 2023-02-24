@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
+
 @Service
 public class ParkInfoServiceImp implements ParkInfoService {
 
@@ -30,6 +32,10 @@ public class ParkInfoServiceImp implements ParkInfoService {
     @Override
     public void deleteParkInfoByParkNum(int parkNum) {
         return;
+    }
+
+    public ParkInfo findFirstByPlateOrderByEntrance(String plate){
+        return parkInfoRepo.findFirstByPlateOrderByEntrance(plate);
     }
 }
 

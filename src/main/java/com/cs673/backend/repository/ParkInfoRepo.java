@@ -7,4 +7,7 @@ import java.util.Optional;
 
 public interface ParkInfoRepo extends JpaRepository<ParkInfo, Integer> {
     Optional<ParkInfo> findByPlate(String plate);
+    //public void save(ParkInfo parkinfo);
+    ParkInfo findFirstByPlateOrderByEntrance(String plate);
+
 }
