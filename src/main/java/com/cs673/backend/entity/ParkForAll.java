@@ -3,7 +3,7 @@ package com.cs673.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
+@Entity
 public class ParkForAll implements Serializable {
     @Id
     @Column(name="Id")
@@ -14,19 +14,22 @@ public class ParkForAll implements Serializable {
     @Column(name="parkNum")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int parkNum;
-    @Column(name="carNum")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String carNum;
+    @Column(name="plate")
+    private String plate;
     @Column(name="parkIn")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Date parkIn;
     @Column(name="parkOut")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Date parkOut;
-    @Column(name="parkTemp")
-    private int parkTemp;
 
 
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
+    }
 
     public int getId() {
         return id;
@@ -52,13 +55,6 @@ public class ParkForAll implements Serializable {
         this.parkNum = i;
     }
 
-    public String getCarNum() {
-        return carNum;
-    }
-
-    public void setCarNum(String carNum) {
-        this.carNum = carNum;
-    }
 
     public Date getParkIn() {
         return parkIn;
@@ -75,14 +71,5 @@ public class ParkForAll implements Serializable {
     public void setParkOut(Date parkOut) {
         this.parkOut = parkOut;
     }
-
-    public int getParkTemp() {
-        return parkTemp;
-    }
-
-    public void setParkTemp(int parkTemp) {
-        this.parkTemp = parkTemp;
-    }
-
 
 }

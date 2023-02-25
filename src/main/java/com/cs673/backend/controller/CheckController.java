@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 @Controller
@@ -31,7 +29,7 @@ public class CheckController {
     public Msg checkIn(@RequestBody ParkInfo data) {
         System.out.println(data);
         parkinfoservice.saveParkInfo(data);
-        parkSpaceService.changeStatus(data.getId(), 1);
+        return Msg.success();
     }
     
     @ResponseBody
@@ -46,7 +44,7 @@ public class CheckController {
     @ResponseBody
     @RequestMapping("/index/check/checkout")
     public Msg CheckOut(FormData data){
-        ParkInfo parkInfo= parkInfoService.findFirstByPlateOrderByEntrance(data.getPlate());
+        ParkInfo parkInfo= parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
         return Msg.success().add("parkInfo",parkInfo);
     }
 }
