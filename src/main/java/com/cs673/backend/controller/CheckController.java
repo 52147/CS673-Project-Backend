@@ -37,7 +37,7 @@ public class CheckController {
     public Msg showHistory(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
         PageRequest pageable = PageRequest.of(page, pageSize, Sort.Direction.DESC, "id");
         Page<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll(pageable);
-        return Msg.success();
+        return Msg.success().add("parkInfoAll",parkingHistoryPage);
     }
 
 

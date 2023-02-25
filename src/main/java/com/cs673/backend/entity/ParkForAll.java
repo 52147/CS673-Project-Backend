@@ -4,23 +4,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 @Entity
+@Table(name = "parkforall")
 public class ParkForAll implements Serializable {
     @Id
-    @Column(name="Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "cardNum")
+    @Column
     private String cardNum;
-    @Column(name="parkNum")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int parkNum;
-    @Column(name="plate")
+    @Column
     private String plate;
-    @Column(name="parkIn")
-    private Date parkIn;
-    @Column(name="parkOut")
-
-    private Date parkOut;
+    @Column
+    private Date entrance;
+    @Column
+    private Date exit;
 
 
     public String getPlate() {
@@ -55,21 +54,19 @@ public class ParkForAll implements Serializable {
         this.parkNum = i;
     }
 
-
-    public Date getParkIn() {
-        return parkIn;
+    public Date getEntrance() {
+        return entrance;
     }
 
-    public void setParkIn(Date parkIn) {
-        this.parkIn = parkIn;
+    public void setEntrance(Date entrance) {
+        this.entrance = entrance;
     }
 
-    public Date getParkOut() {
-        return parkOut;
+    public Date getExit() {
+        return exit;
     }
 
-    public void setParkOut(Date parkOut) {
-        this.parkOut = parkOut;
+    public void setExit(Date exit) {
+        this.exit = exit;
     }
-
 }
