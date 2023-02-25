@@ -1,13 +1,21 @@
 package com.cs673.backend.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
+@Entity
 public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String username;
+    @Column
     private String password;
+    @Column
     private int role;
+    @Transient
     private int cardId;
+    @Transient
     private String cardNum;
 
     public Integer getId() {

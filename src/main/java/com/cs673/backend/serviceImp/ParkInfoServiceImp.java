@@ -16,12 +16,10 @@ public class ParkInfoServiceImp implements ParkInfoService {
     @Autowired
     private ParkInfoRepo parkInfoRepo;
     @Override
-    public void saveParkInfo(FormData data) {
+    public void saveParkInfo(ParkInfo data) {
         Date entrance = new Date();
-        ParkInfo parkInfo = new ParkInfo();
-        parkInfo.setPlate(data.getPlate());
-        parkInfo.setEntrance(entrance);
-        parkInfoRepo.save(parkInfo);
+        data.setEntrance(entrance);
+        parkInfoRepo.save(data);
     }
 
     @Override

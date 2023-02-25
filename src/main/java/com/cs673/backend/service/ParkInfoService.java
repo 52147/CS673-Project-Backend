@@ -4,7 +4,7 @@ import com.cs673.backend.DTO.FormData;
 import com.cs673.backend.entity.ParkInfo;
 
 public interface ParkInfoService {
-    public void saveParkInfo(FormData data);
+    public void saveParkInfo(ParkInfo data);
     public ParkInfo findParkInfoByParknum(int parkNum);
     public void deleteParkInfoByParkNum(int parkNum);
 

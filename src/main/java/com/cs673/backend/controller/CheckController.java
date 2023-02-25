@@ -1,9 +1,11 @@
 package com.cs673.backend.controller;
 
 import com.cs673.backend.DTO.FormData;
+
 import com.cs673.backend.entity.ParkForAll;
 import com.cs673.backend.entity.ParkInfo;
 import com.cs673.backend.service.ParkForAllService;
+
 import com.cs673.backend.service.ParkInfoService;
 import com.cs673.backend.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +17,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/index/check/checkIn")
+import java.util.Map;
+@Controller
 public class CheckController {
     @Autowired
-    private ParkInfoService parkInfoService;
-
+    private ParkInfoService parkinfoservice;
     @Autowired
     private ParkForAllService parkForAllService;
-
-
+    
+    @PostMapping
+    @RequestMapping("/index/check/checkIn")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Msg checkIn(@RequestBody ParkInfo data) {
+        System.out.println(data);
+        parkinfoservice.saveParkInfo(data);
+        parkSpaceService.changeStatus(data.getId(), 1);
+    }
+    
     @ResponseBody
     @RequestMapping( "/index/check/checkIn/checkHistory")
     public Msg showHistory(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
@@ -32,13 +41,7 @@ public class CheckController {
         Page<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll(pageable);
         return Msg.success();
     }
-    @ResponseBody
-    @RequestMapping("/index/check/checkIn")
-    public Msg checkIn(FormData data){
-        parkInfoService.saveParkInfo(data);
-//      parkSpaceService.changeStatus(data.getId(), 1);
-        return Msg.success();
-    }
+
 
     @ResponseBody
     @RequestMapping("/index/check/checkout")
