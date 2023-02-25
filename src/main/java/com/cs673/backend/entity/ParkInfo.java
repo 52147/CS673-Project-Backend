@@ -1,7 +1,5 @@
 package com.cs673.backend.entity;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -61,8 +59,11 @@ public class ParkInfo implements Serializable {
         this.entrance = entrance;
     }
 
+
     @Override
     public String toString() {
         return "ParkInfo [id=" + id + ", parkNum=" + parkNum + ", cardNum=" + cardNum + ", plate=" + plate + ", entrance=" + entrance +  "]";
     }
+
+
 }
