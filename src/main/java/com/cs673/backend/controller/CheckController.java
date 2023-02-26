@@ -4,6 +4,7 @@ import com.cs673.backend.DTO.FormData;
 
 import com.cs673.backend.entity.ParkForAll;
 import com.cs673.backend.entity.ParkInfo;
+import com.cs673.backend.repository.ParkInfoRepo;
 import com.cs673.backend.service.ParkForAllService;
 
 import com.cs673.backend.service.ParkInfoService;
@@ -47,4 +48,24 @@ public class CheckController {
         ParkInfo parkInfo= parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
         return Msg.success().add("parkInfo",parkInfo);
     }
+
+    @ResponseBody
+    @GetMapping
+    @RequestMapping("/index/check/checkPlate")
+    public Msg CheckPlate(@RequestBody ParkInfo data){
+        ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
+        return Msg.success().add("parkinfo", parkInfo);
+    }
+
+    @ResponseBody
+    @GetMapping
+    @RequestMapping("/index/check/checkNum")
+    public Msg CheckNum(@RequestBody ParkInfo data){
+        ParkInfo parkInfo = parkinfoservice.findParkInfoByParkNum(data.getParkNum());
+        return Msg.success().add("parkinfomation", parkInfo);
+    }
+
+
+
+
 }

@@ -10,4 +10,6 @@ public interface ParkInfoRepo extends JpaRepository<ParkInfo, Integer> {
     //public void save(ParkInfo parkinfo);
     ParkInfo findFirstByPlateOrderByEntrance(String plate);
 
+
+    ParkInfo findParkInfoByParkNum(int parkNum);
 }

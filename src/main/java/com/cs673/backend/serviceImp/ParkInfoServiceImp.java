@@ -23,17 +23,18 @@ public class ParkInfoServiceImp implements ParkInfoService {
     }
 
     @Override
-    public ParkInfo findParkInfoByParknum(int parkNum) {
-        return null;
+    public ParkInfo findParkInfoByParkNum(int parkNum) {
+        return parkInfoRepo.findParkInfoByParkNum(parkNum);
     }
 
     @Override
     public void deleteParkInfoByParkNum(int parkNum) {
         return;
     }
-
+    @Override
     public ParkInfo findFirstByPlateOrderByEntrance(String plate){
         return parkInfoRepo.findFirstByPlateOrderByEntrance(plate);
     }
+
 }
 
