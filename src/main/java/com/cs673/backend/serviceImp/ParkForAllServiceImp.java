@@ -26,7 +26,7 @@ public class ParkForAllServiceImp implements  ParkForAllService{
     //public AllData findById(int id) {return parkForAllRepo.findById(id);}
 
     @Override
-    public Page<ParkForAll> findAllParkInForAll(Pageable pageable){return parkForAllRepo.findAll(pageable);}
+    public List<ParkForAll> findAllParkInForAll(){return parkForAllRepo.findAll();}
 
     @Override
     public Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id){return parkForAllRepo.findAllByOrderByIdDesc(id);}

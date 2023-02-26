@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 @Controller
 public class CheckController {
@@ -35,9 +36,8 @@ public class CheckController {
     
     @ResponseBody
     @RequestMapping( "/index/check/checkIn/checkHistory")
-    public Msg showHistory(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
-        PageRequest pageable = PageRequest.of(page, pageSize, Sort.Direction.DESC, "id");
-        Page<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll(pageable);
+    public Msg showHistory(){
+        List<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll();
         return Msg.success().add("parkInfoAll",parkingHistoryPage);
     }
 
