@@ -11,7 +11,7 @@
  Target Server Version : 80028 (8.0.28)
  File Encoding         : 65001
 
- Date: 26/02/2023 16:31:47
+ Date: 26/02/2023 17:29:34
 */
 
 SET NAMES utf8mb4;
@@ -26,8 +26,8 @@ CREATE TABLE `parkforall`  (
   `card_num` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `park_num` int NULL DEFAULT NULL,
   `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `entrance` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `exit` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `entrance` time NULL DEFAULT NULL,
+  `exit` time NULL DEFAULT NULL,
   `payment_Amount` int NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
@@ -64,7 +64,7 @@ COMMIT;
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment`  (
   `id` int NOT NULL,
-  `payment_amount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `payment_Amount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `plate` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `car_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
