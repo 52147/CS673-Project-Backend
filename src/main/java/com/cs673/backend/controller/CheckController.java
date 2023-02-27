@@ -36,9 +36,9 @@ public class CheckController {
     
     @ResponseBody
     @RequestMapping( "/index/check/checkIn/checkHistory")
-    public Msg showHistory(){
+    public List<ParkForAll> showHistory(){
         List<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll();
-        return Msg.success().add("parkInfoAll",parkingHistoryPage);
+        return parkingHistoryPage;
     }
 
 
