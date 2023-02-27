@@ -21,6 +21,27 @@ public class ParkForAll implements Serializable {
     @Column
     private Date exit;
 
+    @Column
+    private long parkingFee;
+
+    @Column
+    private int totalParkingTime;
+
+    public long getParkingFee() {
+        return parkingFee;
+    }
+
+    public void setParkingFee(long parkingFee) {
+        this.parkingFee = parkingFee;
+    }
+
+    public int getTotalParkingTime() {
+        return totalParkingTime;
+    }
+
+    public void setTotalParkingTime(int totalParkingTime) {
+        this.totalParkingTime = totalParkingTime;
+    }
 
     public String getPlate() {
         return plate;

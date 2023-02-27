@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CheckController {
     @Autowired
     private ParkInfoService parkinfoservice;
@@ -27,14 +28,15 @@ public class CheckController {
     
     @PostMapping
     @RequestMapping("/index/check/checkIn")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Msg checkIn(@RequestBody ParkInfo data) {
         System.out.println(data);
+        if(checkEntrance(data.getPlate())) {
+            return Msg.success().add("Entrance", "false");
+        }
         parkinfoservice.saveParkInfo(data);
-        return Msg.success();
+        return Msg.success().add("Entrance", "true");
     }
-    
-    @ResponseBody
+
     @RequestMapping( "/index/check/checkIn/checkHistory")
     public List<ParkForAll> showHistory(){
         List<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll();
@@ -42,27 +44,25 @@ public class CheckController {
     }
 
 
-    @ResponseBody
-    @RequestMapping("/index/check/checkout")
-    public Msg CheckOut(FormData data){
-        ParkInfo parkInfo= parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
-        return Msg.success().add("parkInfo",parkInfo);
-    }
-
-    @ResponseBody
     @GetMapping
     @RequestMapping("/index/check/checkPlate")
-    public Msg CheckPlate(@RequestBody ParkInfo data){
+    public ParkInfo CheckPlate(@RequestBody ParkInfo data){
         ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
-        return Msg.success().add("parkinfo", parkInfo);
+        return parkInfo;
     }
 
-    @ResponseBody
     @GetMapping
     @RequestMapping("/index/check/checkNum")
     public Msg CheckNum(@RequestBody ParkInfo data){
         ParkInfo parkInfo = parkinfoservice.findParkInfoByParkNum(data.getParkNum());
         return Msg.success().add("parkinfomation", parkInfo);
+    }
+
+    public boolean checkEntrance(String plate) {
+        if(parkinfoservice.findParkInfoByPlate(plate) != null) {
+            return true;
+        }
+        return false;
     }
 
 

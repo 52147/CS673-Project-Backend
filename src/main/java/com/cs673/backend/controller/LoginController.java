@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
     @Autowired
@@ -24,7 +25,6 @@ public class LoginController {
     private JwtTokenUtil jwtTokenUtil;
     @RequestMapping("/login")
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<?> login(@RequestBody User loginUser) {
         User user = userService.findUserByUsername(loginUser.getUsername());
 

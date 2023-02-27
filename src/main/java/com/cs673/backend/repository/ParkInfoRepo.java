@@ -12,4 +12,6 @@ public interface ParkInfoRepo extends JpaRepository<ParkInfo, Integer> {
 
 
     ParkInfo findParkInfoByParkNum(int parkNum);
+
+    ParkInfo findParkInfoByPlate(String plate);
 }

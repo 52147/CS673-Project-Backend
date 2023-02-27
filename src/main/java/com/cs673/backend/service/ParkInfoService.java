@@ -6,6 +6,8 @@ import com.cs673.backend.entity.ParkInfo;
 public interface ParkInfoService {
     public void saveParkInfo(ParkInfo data);
     public ParkInfo findParkInfoByParkNum(int parkNum);
+
+    public ParkInfo findParkInfoByPlate(String plate);
     public void deleteParkInfoByParkNum(int parkNum);
 
     public ParkInfo findFirstByPlateOrderByEntrance(String plate);

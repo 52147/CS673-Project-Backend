@@ -59,12 +59,14 @@ CREATE TABLE `parkinfo` (
 -- ----------------------------
 DROP TABLE IF EXISTS `parkforall`;
 CREATE TABLE `parkforall`  (
-                               `id` int(11) NOT NULL,
-                               `card_num` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-                               `park_num` int(11) NULL DEFAULT NULL,
-                               `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-                               `entrance` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-                               `exit` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL
+    `id` int(11) NOT NULL,
+    `card_num` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+    `park_num` int(11) NULL DEFAULT NULL,
+    `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+    `entrance` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+    `exit` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+    `parking_fee` int(11) NULL DEFAULT NULL,
+    `total_parking_time` varchar(255) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
 -- ----------------------------

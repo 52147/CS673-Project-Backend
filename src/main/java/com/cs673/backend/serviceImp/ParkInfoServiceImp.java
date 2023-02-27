@@ -28,6 +28,11 @@ public class ParkInfoServiceImp implements ParkInfoService {
     }
 
     @Override
+    public ParkInfo findParkInfoByPlate(String plate) {
+        return parkInfoRepo.findParkInfoByPlate(plate);
+    }
+
+    @Override
     public void deleteParkInfoByParkNum(int parkNum) {
         return;
     }
