@@ -69,7 +69,7 @@ public class CheckController {
         Date entrance = parkInfo.getEntrance();
         long parkingTime = calTimeDiffInMinutes(entrance, exit);
         BigDecimal parkingFee = calParkingFee(parkingTime);
-        return Msg.success().add("parkInfo", parkInfo).add("parkingFee", parkingFee).add("exit", exit);
+        return Msg.success().add("parkInfo", parkInfo).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
     }
 
     @GetMapping
@@ -96,6 +96,12 @@ public class CheckController {
 
     public BigDecimal calParkingFee(long minutes) {
         return new BigDecimal(minutes).divide(new BigDecimal(60), RoundingMode.DOWN).multiply(new BigDecimal(2));
+    }
+
+    public String parkingtimeToString(long minutes) {
+        long hours = minutes / 60;
+        long minute = minutes % 60;
+        return hours + " hours and " + minute + " minutes";
     }
 
 
