@@ -16,6 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +43,17 @@ public class CheckController {
         return Msg.success().add("Entrance", "true");
     }
 
+    @RequestMapping("/index/check/checkOut")
+    public Msg checkOut(@RequestBody ParkInfo data) {
+        ParkInfo parkinfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
+
+        //Transfer parkinfo to parkforall
+        parkForAllService.save(parkinfo);
+        parkinfoservice.deleteParkInfoByPlate(data.getPlate());
+        return Msg.success();
+    }
+
+
     @RequestMapping( "/index/check/checkIn/checkHistory")
     public List<ParkForAll> showHistory(){
         List<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll();
@@ -55,7 +68,7 @@ public class CheckController {
         Date exit = new Date();
         Date entrance = parkInfo.getEntrance();
         long parkingTime = calTimeDiffInMinutes(entrance, exit);
-        float parkingFee = calParkingFee(parkingTime);
+        BigDecimal parkingFee = calParkingFee(parkingTime);
         return Msg.success().add("parkInfo", parkInfo).add("parkingFee", parkingFee).add("exit", exit);
     }
 
@@ -73,14 +86,6 @@ public class CheckController {
         return false;
     }
 
-    public String calTimeDiff(Date entrance, Date exit){
-        long timeDiffMillis = exit.getTime() - entrance.getTime();
-
-        long hours = TimeUnit.MILLISECONDS.toHours(timeDiffMillis);
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiffMillis) - TimeUnit.HOURS.toMinutes(hours);
-        String res = hours + " hours and " + minutes;
-        return res;
-    }
 
     public long calTimeDiffInMinutes(Date entrance, Date exit) {
         long timeDiffMillis = exit.getTime() - entrance.getTime();
@@ -89,8 +94,8 @@ public class CheckController {
         return minutes;
     }
 
-    public float calParkingFee(long minutes) {
-        return minutes / 60 * 2;
+    public BigDecimal calParkingFee(long minutes) {
+        return new BigDecimal(minutes).divide(new BigDecimal(60), RoundingMode.DOWN).multiply(new BigDecimal(2));
     }
 
 

@@ -13,20 +13,19 @@ public class ParkForAll implements Serializable {
     @Column
     private String cardNum;
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int parkNum;
     @Column
     private String plate;
     @Column
     private Date entrance;
-    @Column
+    @Column(name="exit_time")
     private Date exit;
 
     @Column
     private BigDecimal parkingFee;
 
     @Column
-    private int totalParkingTime;
+    private long totalParkingTime;
 
     public BigDecimal getParkingFee() {
         return parkingFee;
@@ -36,11 +35,11 @@ public class ParkForAll implements Serializable {
         this.parkingFee = parkingFee;
     }
 
-    public int getTotalParkingTime() {
+    public long getTotalParkingTime() {
         return totalParkingTime;
     }
 
-    public void setTotalParkingTime(int totalParkingTime) {
+    public void setTotalParkingTime(long totalParkingTime) {
         this.totalParkingTime = totalParkingTime;
     }
 

@@ -1,16 +1,16 @@
 package com.cs673.backend.serviceImp;
 
-import com.cs673.backend.DTO.FormData;
 import com.cs673.backend.entity.ParkInfo;
 import com.cs673.backend.repository.ParkInfoRepo;
 import com.cs673.backend.service.ParkInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class ParkInfoServiceImp implements ParkInfoService {
 
     @Autowired
@@ -33,8 +33,8 @@ public class ParkInfoServiceImp implements ParkInfoService {
     }
 
     @Override
-    public void deleteParkInfoByParkNum(int parkNum) {
-        return;
+    public void deleteParkInfoByPlate(String plate) {
+        parkInfoRepo.deleteParkInfoByPlate(plate);
     }
     @Override
     public ParkInfo findFirstByPlateOrderByEntrance(String plate){

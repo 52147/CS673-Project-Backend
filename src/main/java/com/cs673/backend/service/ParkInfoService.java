@@ -8,7 +8,8 @@ public interface ParkInfoService {
     public ParkInfo findParkInfoByParkNum(int parkNum);
 
     public ParkInfo findParkInfoByPlate(String plate);
-    public void deleteParkInfoByParkNum(int parkNum);
+
+    void deleteParkInfoByPlate(String plate);
 
     public ParkInfo findFirstByPlateOrderByEntrance(String plate);
 }

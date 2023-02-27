@@ -59,14 +59,15 @@ CREATE TABLE `parkinfo` (
 -- ----------------------------
 DROP TABLE IF EXISTS `parkforall`;
 CREATE TABLE `parkforall`  (
-    `id` int(11) NOT NULL,
+    `id` int(11) NOT NULL auto_increment,
     `card_num` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
     `park_num` int(11) NULL DEFAULT NULL,
     `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
     `entrance` datetime DEFAULT NULL,
-    `exit` datetime DEFAULT NULL,
-    `parking_fee` decimal NULL DEFAULT NULL,
-    `total_parking_time` long NULL DEFAULT NULL
+    `exit_time` datetime DEFAULT NULL,
+    `total_parking_time` int(11) DEFAULT NULL,
+    `parking_fee` decimal(10,2)  DEFAULT NULL,
+    PRIMARY KEY  (`id`)
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
 -- ----------------------------
