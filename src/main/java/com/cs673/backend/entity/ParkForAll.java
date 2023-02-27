@@ -2,6 +2,7 @@ package com.cs673.backend.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 @Entity
 @Table(name = "parkforall")
@@ -22,16 +23,16 @@ public class ParkForAll implements Serializable {
     private Date exit;
 
     @Column
-    private long parkingFee;
+    private BigDecimal parkingFee;
 
     @Column
     private int totalParkingTime;
 
-    public long getParkingFee() {
+    public BigDecimal getParkingFee() {
         return parkingFee;
     }
 
-    public void setParkingFee(long parkingFee) {
+    public void setParkingFee(BigDecimal parkingFee) {
         this.parkingFee = parkingFee;
     }
 

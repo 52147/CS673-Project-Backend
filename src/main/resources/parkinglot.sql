@@ -65,7 +65,7 @@ CREATE TABLE `parkforall`  (
     `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
     `entrance` datetime DEFAULT NULL,
     `exit` datetime DEFAULT NULL,
-    `parking_fee` int(11) NULL DEFAULT NULL,
+    `parking_fee` decimal NULL DEFAULT NULL,
     `total_parking_time` long NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 

@@ -16,8 +16,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class CheckController {
@@ -46,9 +50,13 @@ public class CheckController {
 
     @GetMapping
     @RequestMapping("/index/check/checkPlate")
-    public ParkInfo CheckPlate(@RequestBody ParkInfo data){
+    public Msg CheckPlate(@RequestBody ParkInfo data){
         ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
-        return parkInfo;
+        Date exit = new Date();
+        Date entrance = parkInfo.getEntrance();
+        long parkingTime = calTimeDiffInMinutes(entrance, exit);
+        float parkingFee = calParkingFee(parkingTime);
+        return Msg.success().add("parkInfo", parkInfo).add("parkingFee", parkingFee).add("exit", exit);
     }
 
     @GetMapping
@@ -65,6 +73,25 @@ public class CheckController {
         return false;
     }
 
+    public String calTimeDiff(Date entrance, Date exit){
+        long timeDiffMillis = exit.getTime() - entrance.getTime();
+
+        long hours = TimeUnit.MILLISECONDS.toHours(timeDiffMillis);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiffMillis) - TimeUnit.HOURS.toMinutes(hours);
+        String res = hours + " hours and " + minutes;
+        return res;
+    }
+
+    public long calTimeDiffInMinutes(Date entrance, Date exit) {
+        long timeDiffMillis = exit.getTime() - entrance.getTime();
+
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiffMillis);
+        return minutes;
+    }
+
+    public float calParkingFee(long minutes) {
+        return minutes / 60 * 2;
+    }
 
 
 

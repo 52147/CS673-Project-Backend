@@ -6,7 +6,7 @@ import java.util.Map;
 public class Msg {
     private int code;
     private String msg;
-    private Map<String, Object> extend = new HashMap();
+    private Map<String, Object> content = new HashMap();
 
     public static Msg success() {
         Msg result = new Msg();
@@ -23,7 +23,7 @@ public class Msg {
     }
 
     public Msg add(String key, Object value) {
-        this.getExtend().put(key, value);
+        this.getContent().put(key, value);
         return this;
     }
 
@@ -43,11 +43,11 @@ public class Msg {
         this.msg = msg;
     }
 
-    public Map<String, Object> getExtend() {
-        return extend;
+    public Map<String, Object> getContent() {
+        return content;
     }
 
-    public void setExtend(Map<String, Object> extend) {
-        this.extend = extend;
+    public void setContent(Map<String, Object> content) {
+        this.content = content;
     }
 }
