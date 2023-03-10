@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
+
 @Service
 @Transactional
 public class ParkInfoServiceImp implements ParkInfoService {
@@ -30,6 +31,11 @@ public class ParkInfoServiceImp implements ParkInfoService {
     @Override
     public ParkInfo findParkInfoByPlate(String plate) {
         return parkInfoRepo.findParkInfoByPlate(plate);
+    }
+
+    @Override
+    public ParkInfo findParkInfoByDate_Entrance(Date entrance) {
+        return parkInfoRepo.findParkInfoByDate_Entrance(entrance);
     }
 
     @Override

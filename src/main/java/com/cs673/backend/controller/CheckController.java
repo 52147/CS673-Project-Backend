@@ -53,7 +53,6 @@ public class CheckController {
         return Msg.success();
     }
 
-
     @RequestMapping( "/index/check/checkIn/checkHistory")
     public List<ParkForAll> showHistory(){
         List<ParkForAll> parkingHistoryPage = parkForAllService.findAllParkInForAll();
@@ -71,6 +70,44 @@ public class CheckController {
         BigDecimal parkingFee = calParkingFee(parkingTime);
         return Msg.success().add("parkInfo", parkInfo).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
     }
+
+    //用入库时间检查还没出去的车。使用数据库parkinfo。
+    @GetMapping
+    @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Entrance")
+    public Msg FindbyDate_Entrance(@RequestBody ParkInfo data){
+        ParkInfo parkInfo = parkinfoservice.findParkInfoByDate_Entrance(data.getEntrance());
+        Date now = new Date();
+        Date entrance = parkInfo.getEntrance();
+        long parkingTime = calTimeDiffInMinutes(entrance, now);
+        BigDecimal parkingFee = calParkingFee(parkingTime);
+        return Msg.success().add("parkInfo", parkInfo).add("parkingFee", parkingFee).add("now", now).add("parkingtime", parkingtimeToString(parkingTime));
+    }
+
+    //用出库时间检查已经出去的车辆。使用数据库parkforall。
+    @GetMapping
+    @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Exit")
+    public Msg FindbyDate_Exit(@RequestBody ParkForAll data){
+        ParkForAll parkForAll = parkForAllService.findParkForAllByDate_Entrance(data.getEntrance());
+        Date exit = parkForAll.getExit();
+        Date entrance = parkForAll.getEntrance();
+        long parkingTime = calTimeDiffInMinutes(entrance, exit);
+        BigDecimal parkingFee = calParkingFee(parkingTime);
+        return Msg.success().add("parkForAll", parkForAll).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
+    }
+
+    //用出库时间检查已经出去的车辆。使用数据库parkforall。
+    @GetMapping
+    @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Entrance_Done")
+    public Msg FindbyDate_Entrance_Done(@RequestBody ParkForAll data){
+        ParkForAll parkForAll = parkForAllService.findParkForAllByDate_Exit(data.getExit());
+        Date exit = parkForAll.getExit();
+        Date entrance = parkForAll.getEntrance();
+        long parkingTime = calTimeDiffInMinutes(entrance, exit);
+        BigDecimal parkingFee = calParkingFee(parkingTime);
+        return Msg.success().add("parkForAll", parkForAll).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
+    }
+
+
 
     @GetMapping
     @RequestMapping("/index/check/checkNum")

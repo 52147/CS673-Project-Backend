@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.Optional;
 
 public interface ParkForAllRepo extends JpaRepository<ParkForAll, Integer> {
@@ -14,6 +15,9 @@ public interface ParkForAllRepo extends JpaRepository<ParkForAll, Integer> {
 
     Optional<ParkForAll> findByPlate(String plate);
 
+    ParkForAll findParkForAllByDate_Entrance(Date entrance);
+
+    ParkForAll findParkForAllByDate_Exit(Date exit);
 
     public ParkInfo findParkInfoByParkNum(@Param("parkNum")int parkNum);
     public void deleteParkInfoByParkNum(@Param("parkNum")int parkNum);

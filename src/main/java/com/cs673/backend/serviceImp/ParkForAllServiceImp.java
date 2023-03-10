@@ -52,6 +52,15 @@ public class ParkForAllServiceImp implements  ParkForAllService{
     @Override
     public Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id){return parkForAllRepo.findAllByOrderByIdDesc(id);}
 
+    @Override
+    public ParkForAll findParkForAllByDate_Entrance(Date entrance) {
+        return parkForAllRepo.findParkForAllByDate_Entrance(entrance);
+    }
+    @Override
+    public ParkForAll findParkForAllByDate_Exit(Date exit){
+        return parkForAllRepo.findParkForAllByDate_Exit(exit);
+    }
+
     public long calTimeDiffInMinutes(Date entrance, Date exit) {
         long timeDiffMillis = exit.getTime() - entrance.getTime();
 
