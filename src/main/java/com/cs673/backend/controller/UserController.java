@@ -27,11 +27,13 @@ public class UserController {
 
     // 新增或者更新
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public boolean save(@RequestBody User user) {
         return userService.saveOrUpdate(user);
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Boolean delete(@PathVariable Integer id) {
         return userService.removeById(id);
     }
