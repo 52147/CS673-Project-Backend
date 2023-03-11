@@ -11,11 +11,32 @@
  Target Server Version : 50740 (5.7.40-log)
  File Encoding         : 65001
 
- Date: 26/02/2023 23:26:59
+ Date: 11/03/2023 02:02:22
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for billtable
+-- ----------------------------
+DROP TABLE IF EXISTS `billtable`;
+CREATE TABLE `billtable`  (
+  `first_one_hour` int(255) NULL DEFAULT NULL,
+  `truck_per_hour` int(11) NULL DEFAULT NULL,
+  `car_per_hour` int(11) NULL DEFAULT NULL,
+  `motor_per_hour` int(11) NULL DEFAULT NULL,
+  `electricity_per_hour` int(11) NULL DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `max_per_day` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+-- ----------------------------
+-- Records of billtable
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for parkforall
@@ -26,10 +47,11 @@ CREATE TABLE `parkforall`  (
   `card_num` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `park_num` int(11) NULL DEFAULT NULL,
   `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `entrance` time NULL DEFAULT NULL,
-  `exit` time NULL DEFAULT NULL,
+  `entrance` datetime NULL DEFAULT NULL,
+  `exit` datetime NULL DEFAULT NULL,
   `parking_fee` int(11) NULL DEFAULT NULL,
-  `total_parking_time` time NULL DEFAULT NULL
+  `total_parking_time` mediumtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
 -- ----------------------------
@@ -55,6 +77,27 @@ CREATE TABLE `parkinfo`  (
 
 -- ----------------------------
 -- Records of parkinfo
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for parkspace
+-- ----------------------------
+DROP TABLE IF EXISTS `parkspace`;
+CREATE TABLE `parkspace`  (
+  `car` int(11) NULL DEFAULT NULL,
+  `electric_car` int(11) NULL DEFAULT NULL,
+  `truck` int(11) NULL DEFAULT NULL,
+  `van` int(11) NULL DEFAULT NULL,
+  `motor` int(11) NULL DEFAULT NULL,
+  `disabled` int(11) NULL DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+-- ----------------------------
+-- Records of parkspace
 -- ----------------------------
 BEGIN;
 COMMIT;
