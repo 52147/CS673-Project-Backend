@@ -85,7 +85,7 @@ public class UserController {
 
     }
     @PostMapping("/import")
-    public Boolean imp(MultipartFile file) throws Exception {
+    public Boolean imp(@RequestParam("file") MultipartFile file) throws Exception {
         InputStream inputStream = file.getInputStream();
         ExcelReader reader = ExcelUtil.getReader(inputStream);
         List<User> list = reader.readAll(User.class);
