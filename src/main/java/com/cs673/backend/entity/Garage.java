@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "garage")
 public class Garage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,7 +13,39 @@ public class Garage implements Serializable {
     @Column
     private int total_spots;
     @Column
-    private int current_sppots;
-    @OneToOne
-    private billtable billtable;
+    private int current_spots;
+    @OneToOne(mappedBy = "garage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private BillTable billtable;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTotal_spots() {
+        return total_spots;
+    }
+
+    public void setTotal_spots(int total_spots) {
+        this.total_spots = total_spots;
+    }
+
+    public int getCurrent_spots() {
+        return current_spots;
+    }
+
+    public void setCurrent_spots(int current_spots) {
+        this.current_spots = current_spots;
+    }
+
+    public BillTable getBilltable() {
+        return billtable;
+    }
+
+    public void setBilltable(BillTable billtable) {
+        this.billtable = billtable;
+    }
 }
