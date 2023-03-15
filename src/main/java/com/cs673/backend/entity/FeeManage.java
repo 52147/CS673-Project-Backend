@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "feeManage")
+@Table(name = "billtable")
 public class FeeManage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class FeeManage implements Serializable {
     private String carType;
 
     @Column
-    private float time;
+    private float hour;
 
     @Column
     private float firstPrice;
@@ -32,8 +32,8 @@ public class FeeManage implements Serializable {
     public void setCarType(String carType) {this.carType = carType;}
     public String getCarType(){return this.carType;}
 
-    public void setTime(float time){this.time=time;}
-    public float getTime(){return this.time;}
+    public void setHour(float hour){this.hour=hour;}
+    public float getHour(){return this.hour;}
 
     public void setFirstPrice(float price){this.firstPrice=price;}
     public float getFirstPrice(){return this.firstPrice;}

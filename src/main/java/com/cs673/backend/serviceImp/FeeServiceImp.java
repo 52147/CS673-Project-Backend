@@ -16,5 +16,9 @@ public class FeeServiceImp implements FeeService {
     private FeeRepo feeRepo;
 
     @Override
-    public List<FeeManage> findFeeByCar(String carType){ return feeRepo.findFeeByCar(carType);}
+    public List<FeeManage> findFeeByCarType(String carType){ return feeRepo.findFeeByCarType(carType);}
+
+    @Override
+    public void save(String carType){feeRepo.save(carType);}
+
 }

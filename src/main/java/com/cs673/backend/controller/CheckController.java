@@ -33,8 +33,7 @@ public class CheckController {
     private ParkInfoService parkinfoservice;
     @Autowired
     private ParkForAllService parkForAllService;
-    @Autowired
-    private FeeService feeService;
+
     
     @PostMapping
     @RequestMapping("/index/check/checkIn")
@@ -108,9 +107,6 @@ public class CheckController {
         return hours + " hours and " + minute + " minutes";
     }
 
-    @RequestMapping( "/index/check/checkIn/checkPrice")
-    public List<FeeManage> showPrice(String carType){
-        List<FeeManage> parkFee = feeService.findFeeByCar(carType);
-        return parkFee;
-    }
+
+
 }

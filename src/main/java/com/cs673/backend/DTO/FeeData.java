@@ -12,22 +12,22 @@ public class FeeData {
 
     private int id;
     private String carType;
-    private float time;
+    private float hour;
     private float firstPrice;
     private float secondPrice;
     private float maxPrice;
     private String comment;
     public FeeData(@JsonProperty("id") int id,
-                    @JsonProperty("carType") String carType,
-                    @JsonProperty("time")float time,
-                    @JsonProperty("firstPrice") float firstPrice,
-                    @JsonProperty("secondPrice") float secondPrice,
-                    @JsonProperty("maxPrice") float maxPrice,
-                    @JsonProperty("comment") String comment
+                   @JsonProperty("hour")float hour,
+                   @JsonProperty("cartype") String carType,
+                   @JsonProperty("firstprice") float firstPrice,
+                   @JsonProperty("secondprice") float secondPrice,
+                   @JsonProperty("maxprice") float maxPrice,
+                   @JsonProperty("comment") String comment
                     ) {
         this.id = id;
         this.carType = carType;
-        this.time = time;
+        this.hour = hour;
         this.firstPrice = firstPrice;
         this.secondPrice = secondPrice;
         this.maxPrice = maxPrice;
@@ -36,8 +36,8 @@ public class FeeData {
     public void setCarType(String carType) {this.carType = carType;}
     public String getCarType(){return this.carType;}
 
-    public void setTime(float time){this.time=time;}
-    public float getTime(){return this.time;}
+    public void setHour(float hour){this.hour=hour;}
+    public float getHour(){return this.hour;}
 
     public void setFirstPrice(float price){this.firstPrice=price;}
     public float getFirstPrice(){return this.firstPrice;}

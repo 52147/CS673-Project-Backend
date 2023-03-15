@@ -18,7 +18,7 @@ public class ParkForAll implements Serializable {
     private String plate;
     @Column
     private Date entrance;
-    @Column(name="exit_time")
+    @Column
     private Date exit;
 
     @Column

@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface FeeRepo extends JpaRepository<FeeManage, Integer> {
-    List<FeeManage> findFeeByCar(String carType);
+    List<FeeManage> findFeeByCarType(String carType);
+
+    void save(String carType);
 
 }
