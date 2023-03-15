@@ -3,15 +3,15 @@
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 50634 (5.6.34)
+ Source Server Version : 50740 (5.7.40-log)
  Source Host           : localhost:3306
  Source Schema         : parkinglot
 
  Target Server Type    : MySQL
- Target Server Version : 50634 (5.6.34)
+ Target Server Version : 50740 (5.7.40-log)
  File Encoding         : 65001
 
- Date: 11/03/2023 23:42:50
+ Date: 14/03/2023 13:06:24
 */
 
 SET NAMES utf8mb4;
@@ -21,39 +21,38 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for billtable
 -- ----------------------------
 DROP TABLE IF EXISTS `billtable`;
-CREATE TABLE `billtable` (
+CREATE TABLE `billtable`  (
   `id` int(11) NOT NULL,
-  `hour` int(11) DEFAULT NULL,
-  `car_type` varchar(255) DEFAULT '',
-  `first_price` int(255) DEFAULT NULL,
-  `second_price` int(11) DEFAULT NULL,
-  `max_price` int(11) DEFAULT NULL,
-  `comment` varchar(255) DEFAULT NULL,
+  `hour` int(11) NULL DEFAULT NULL,
+  `car_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
+  `first_price` int(255) NULL DEFAULT NULL,
+  `second_price` int(11) NULL DEFAULT NULL,
+  `max_price` int(11) NULL DEFAULT NULL,
+  `comment` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
 -- ----------------------------
 -- Records of billtable
 -- ----------------------------
 BEGIN;
-INSERT INTO `billtable` (`id`, `hour`, `cartype`, `firstprice`, `secondprice`, `maxprice`, `comment`) VALUES (1, 2, 'bicycle', 2, 2, 2, '2222');
 COMMIT;
 
 -- ----------------------------
 -- Table structure for parkforall
 -- ----------------------------
 DROP TABLE IF EXISTS `parkforall`;
-CREATE TABLE `parkforall` (
+CREATE TABLE `parkforall`  (
   `id` int(11) NOT NULL,
-  `card_num` varchar(255) DEFAULT NULL,
-  `park_num` int(11) DEFAULT NULL,
-  `plate` varchar(255) DEFAULT NULL,
-  `entrance` datetime DEFAULT NULL,
-  `exit` datetime DEFAULT NULL,
-  `parking_fee` int(11) DEFAULT NULL,
-  `total_parking_time` mediumtext,
+  `card_num` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `park_num` int(11) NULL DEFAULT NULL,
+  `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `entrance` datetime NULL DEFAULT NULL,
+  `exit` datetime NULL DEFAULT NULL,
+  `parking_fee` int(11) NULL DEFAULT NULL,
+  `total_parking_time` mediumtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
 -- ----------------------------
 -- Records of parkforall
@@ -65,16 +64,16 @@ COMMIT;
 -- Table structure for parkinfo
 -- ----------------------------
 DROP TABLE IF EXISTS `parkinfo`;
-CREATE TABLE `parkinfo` (
+CREATE TABLE `parkinfo`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `park_num` int(11) DEFAULT NULL,
-  `card_num` varchar(50) DEFAULT NULL,
-  `plate` varchar(50) DEFAULT NULL,
-  `entrance` datetime DEFAULT NULL,
+  `park_num` int(11) NULL DEFAULT NULL,
+  `card_num` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `plate` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `entrance` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `plate` (`plate`) USING BTREE,
-  CONSTRAINT `parkinfo_ibfk_1` FOREIGN KEY (`plate`) REFERENCES `persons` (`plate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  INDEX `plate`(`plate`) USING BTREE,
+  CONSTRAINT `parkinfo_ibfk_1` FOREIGN KEY (`plate`) REFERENCES `persons` (`plate`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 -- ----------------------------
 -- Records of parkinfo
@@ -86,16 +85,16 @@ COMMIT;
 -- Table structure for parkspace
 -- ----------------------------
 DROP TABLE IF EXISTS `parkspace`;
-CREATE TABLE `parkspace` (
-  `car` int(11) DEFAULT NULL,
-  `electric_car` int(11) DEFAULT NULL,
-  `truck` int(11) DEFAULT NULL,
-  `van` int(11) DEFAULT NULL,
-  `motor` int(11) DEFAULT NULL,
-  `disabled` int(11) DEFAULT NULL,
+CREATE TABLE `parkspace`  (
+  `car` int(11) NULL DEFAULT NULL,
+  `electric_car` int(11) NULL DEFAULT NULL,
+  `truck` int(11) NULL DEFAULT NULL,
+  `van` int(11) NULL DEFAULT NULL,
+  `motor` int(11) NULL DEFAULT NULL,
+  `disabled` int(11) NULL DEFAULT NULL,
   `id` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
 -- ----------------------------
 -- Records of parkspace
@@ -107,13 +106,13 @@ COMMIT;
 -- Table structure for payment
 -- ----------------------------
 DROP TABLE IF EXISTS `payment`;
-CREATE TABLE `payment` (
+CREATE TABLE `payment`  (
   `id` int(11) NOT NULL,
-  `parking_fee` varchar(255) DEFAULT NULL,
-  `plate` varchar(255) DEFAULT NULL,
-  `car_type` varchar(255) DEFAULT NULL,
+  `parking_fee` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `plate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `car_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 -- ----------------------------
 -- Records of payment
@@ -125,13 +124,13 @@ COMMIT;
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+CREATE TABLE `user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `role` int(11) DEFAULT '3' COMMENT '1: super admin, 2: admin, 3: user',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `role` int(11) NULL DEFAULT 3 COMMENT '1: super admin, 2: admin, 3: user',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 -- ----------------------------
 -- Records of user
