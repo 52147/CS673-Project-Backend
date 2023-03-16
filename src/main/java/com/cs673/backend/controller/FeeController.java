@@ -15,12 +15,6 @@ public class FeeController {
   private FeeService feeService;
 
 
-  //  @PostMapping
-//  @RequestMapping( "/check/index/check/checkIn/checkPrice")
-//  public FeeManage showPrice(@RequestParam String carType){
-//    FeeManage parkFee = feeService.findFeeManageByCarType(carType);
-//    return parkFee;
-//  }
   @PostMapping
   @RequestMapping( "/check/index/check/checkIn/checkPrice")
   public Msg showPrice(@RequestBody FeeManage carType){
