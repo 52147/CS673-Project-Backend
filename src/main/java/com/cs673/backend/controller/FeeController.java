@@ -18,7 +18,7 @@ public class FeeController {
   @PostMapping
   @RequestMapping( "/check/index/check/checkIn/checkPrice")
   public Msg showPrice(@RequestBody FeeManage carType){
-    FeeManage parkFee = feeService.findFeeManageByCarType(carType.getCarType());
+    FeeManage parkFee = feeService.findFeeManageByCarType(carType.getCarType().toLowerCase());
     return Msg.success()
             .add("id",parkFee.getId())
             .add("hour",parkFee.getHour())
@@ -31,7 +31,7 @@ public class FeeController {
 
   @RequestMapping( "/check/index/check/checkIn/changePrice")
   public void changePrice(@RequestBody FeeManage car) {
-    FeeManage parkFee = feeService.findFeeManageByCarType(car.getCarType());
+    FeeManage parkFee = feeService.findFeeManageByCarType(car.getCarType().toLowerCase());
     if (car.getHour()!=0)
      parkFee.setHour(car.getHour());
     parkFee.setCarType(car.getCarType());
