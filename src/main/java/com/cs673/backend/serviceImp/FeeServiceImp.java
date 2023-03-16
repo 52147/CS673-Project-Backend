@@ -20,13 +20,7 @@ public class FeeServiceImp implements FeeService {
 
     @Override
     public void save(FeeManage feeManage){
-        FeeManage newFee = new FeeManage();
-        newFee.setCarType(feeManage.getCarType());
-        newFee.setHour(feeManage.getHour());
-        newFee.setFirstPrice(feeManage.getFirstPrice());
-        newFee.setSecondPrice(feeManage.getSecondPrice());
-        newFee.setMaxPrice(feeManage.getMaxPrice());
-        feeRepo.save(newFee);
+        feeRepo.save(feeManage);
     }
 
 }
