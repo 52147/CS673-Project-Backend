@@ -11,7 +11,7 @@
  File Encoding         : 65001
 
 Date: 14/03/2023 13:06:24
-
+*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -38,7 +38,7 @@ CREATE TABLE `billtable`  (
 -- ----------------------------
 BEGIN;
 
-INSERT INTO `billtable` (`id`, `hour`, `cartype`, `firstprice`, `secondprice`, `maxprice`, `comment`) VALUES (1, 2, 'bicycle', 2, 2, 2, '2222');
+INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUES (1, 2, 'bicycle', 2, 2, 2, '2222');
 
 COMMIT;
 

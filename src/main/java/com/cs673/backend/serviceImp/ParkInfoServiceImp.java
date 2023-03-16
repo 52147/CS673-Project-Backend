@@ -34,8 +34,8 @@ public class ParkInfoServiceImp implements ParkInfoService {
     }
 
     @Override
-    public ParkInfo findParkInfoByDate_Entrance(Date entrance) {
-        return parkInfoRepo.findParkInfoByDate_Entrance(entrance);
+    public ParkInfo findParkInfoByEntrance(Date entrance) {
+        return parkInfoRepo.findParkInfoByEntrance(entrance);
     }
 
     @Override

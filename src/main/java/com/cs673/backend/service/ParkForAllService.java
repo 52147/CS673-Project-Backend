@@ -21,7 +21,7 @@ public interface ParkForAllService {
     Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id);
 
 
-    public ParkForAll findParkForAllByDate_Entrance(Date entrance);
+    public ParkForAll findParkForAllByEntrance(Date entrance);
 
-    public ParkForAll findParkForAllByDate_Exit(Date exit);
+    public ParkForAll findParkForAllByExit(Date exit);
 }

@@ -11,7 +11,7 @@ public interface ParkInfoService {
 
     public ParkInfo findParkInfoByPlate(String plate);
 
-    public ParkInfo findParkInfoByDate_Entrance(Date entrance);
+    public ParkInfo findParkInfoByEntrance(Date entrance);
 
 
     void deleteParkInfoByPlate(String plate);

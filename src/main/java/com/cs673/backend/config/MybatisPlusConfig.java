@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @MapperScan("com.cs673.backend.mapper")
-public class MybatisPlusConfig {
+public class
+MybatisPlusConfig {
 
     // 最新版
     @Bean

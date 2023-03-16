@@ -15,9 +15,9 @@ public interface ParkForAllRepo extends JpaRepository<ParkForAll, Integer> {
 
     Optional<ParkForAll> findByPlate(String plate);
 
-    ParkForAll findParkForAllByDate_Entrance(Date entrance);
+    ParkForAll findParkForAllByEntrance(Date entrance);
 
-    ParkForAll findParkForAllByDate_Exit(Date exit);
+    ParkForAll findParkForAllByExit(Date exit);
 
     public ParkInfo findParkInfoByParkNum(@Param("parkNum")int parkNum);
     public void deleteParkInfoByParkNum(@Param("parkNum")int parkNum);

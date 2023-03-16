@@ -14,8 +14,6 @@ public class Garage implements Serializable {
     private int total_spots;
     @Column
     private int current_spots;
-    @OneToOne(mappedBy = "garage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private BillTable billtable;
 
     public int getId() {
         return id;
@@ -41,11 +39,4 @@ public class Garage implements Serializable {
         this.current_spots = current_spots;
     }
 
-    public BillTable getBilltable() {
-        return billtable;
-    }
-
-    public void setBilltable(BillTable billtable) {
-        this.billtable = billtable;
-    }
 }
