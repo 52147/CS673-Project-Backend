@@ -30,13 +30,28 @@ public class FeeController {
   }
 
   @RequestMapping( "/check/index/check/checkIn/changePrice")
-  public void changePrice(@RequestBody FeeManage car) {
+  public Msg changePrice(@RequestBody FeeManage car) {
     FeeManage parkFee = feeService.findFeeManageByCarType(car.getCarType());
-    parkFee.setMaxPrice(car.getMaxPrice());
-    parkFee.setFirstPrice(car.getFirstPrice());
-    parkFee.setSecondPrice(car.getSecondPrice());
-    parkFee.setHour(car.getHour());
+    if (car.getHour()!=0)
+     parkFee.setHour(car.getHour());
     parkFee.setCarType(car.getCarType());
+    if (car.getFirstPrice()!=0)
+      parkFee.setFirstPrice(car.getFirstPrice());
+    if(car.getSecondPrice()!=0)
+      parkFee.setSecondPrice(car.getSecondPrice());
+    if(car.getMaxPrice()!=0)
+      parkFee.setMaxPrice(car.getMaxPrice());
+    if(car.getComment()!=null)
+      parkFee.setComment(car.getComment());
+    feeService.save(parkFee);
+    return Msg.success()
+            .add("id",parkFee.getId())
+            .add("hour",parkFee.getHour())
+            .add("carType",parkFee.getCarType())
+            .add("firstPrice",parkFee.getFirstPrice())
+            .add("secondPrice",parkFee.getSecondPrice())
+            .add("maxPrice",parkFee.getMaxPrice())
+            .add("comment",parkFee.getComment());
   }
 
 

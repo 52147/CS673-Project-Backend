@@ -42,7 +42,7 @@ public class FeeData {
     public void setFirstPrice(float price){this.firstPrice=price;}
     public float getFirstPrice(){return this.firstPrice;}
 
-    public void setSecondPrice(float price){this.secondPrice=price;}
+    public void setSecondPrice(float secondPrice){this.secondPrice=secondPrice;}
     public float getSecondPrice(){return this.secondPrice;}
 
     public void setMaxPrice(float price){this.maxPrice=price;}
