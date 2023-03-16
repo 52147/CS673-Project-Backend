@@ -5,8 +5,11 @@ import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cs673.backend.DTO.UserDTO;
 import com.cs673.backend.entity.User;
+import com.cs673.backend.mapper.UserMapper;
 import com.cs673.backend.service.UserService;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
@@ -25,10 +28,34 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    // 新增或者更新
-    @PostMapping
+    @Resource
+    private UserMapper userMapper;
+
+    // 更新
+    @PostMapping("/save")
     public boolean save(@RequestBody User user) {
         return userService.saveOrUpdate(user);
+    }
+
+    // 新增
+    @PostMapping("/add")
+    public boolean add(@RequestBody User user) {
+        if(getUserByName(user.getUsername()).size()!=0){
+            return false;
+        }
+        return userService.saveOrUpdate(user);
+    }
+
+    @PostMapping("/register")
+    public User register(@RequestBody UserDTO userDTO) {
+        return userService.register(userDTO);
+    }
+
+    @GetMapping("/getUserByName")
+    public List<User> getUserByName(String name) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",name);
+        return userMapper.selectList(queryWrapper);
     }
 
     @DeleteMapping("/{id}")

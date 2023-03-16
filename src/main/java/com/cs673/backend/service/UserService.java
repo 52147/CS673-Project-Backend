@@ -2,6 +2,7 @@ package com.cs673.backend.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cs673.backend.DTO.UserDTO;
 import com.cs673.backend.entity.User;
 
 /**
@@ -17,6 +18,8 @@ public interface UserService extends IService<User> {
     User findUserByUsername(String username);
 
     User findByUsernameAndPassword(String username, String password);
+
+    User register(UserDTO userDTO);
 
     //UserDTO login(UserDTO userDTO);
 
