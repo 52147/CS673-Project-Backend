@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ParkForAllService {
@@ -20,4 +21,7 @@ public interface ParkForAllService {
     Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id);
 
 
+    public ParkForAll findParkForAllByDate_Entrance(Date entrance);
+
+    public ParkForAll findParkForAllByDate_Exit(Date exit);
 }
