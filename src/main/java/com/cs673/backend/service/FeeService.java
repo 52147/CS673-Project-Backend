@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 public interface FeeService {
-    public List<FeeManage> findFeeByCarType(String carType);
-    public void save(String carType);
+    public FeeManage findFeeManageByCarType(String carType);
+    public void save(FeeManage feeManage);
 }
