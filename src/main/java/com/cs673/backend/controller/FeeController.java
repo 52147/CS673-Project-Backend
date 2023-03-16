@@ -6,6 +6,7 @@ import com.cs673.backend.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -41,8 +42,9 @@ public class FeeController {
       parkFee.setSecondPrice(car.getSecondPrice());
     if(car.getMaxPrice()!=0)
       parkFee.setMaxPrice(car.getMaxPrice());
-    if(car.getComment()!=null)
+    if (!Objects.equals(null, car.getComment())){
       parkFee.setComment(car.getComment());
+    }
     feeService.save(parkFee);
   }
 
