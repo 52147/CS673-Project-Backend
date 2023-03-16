@@ -30,7 +30,7 @@ public class FeeController {
   }
 
   @RequestMapping( "/check/index/check/checkIn/changePrice")
-  public Msg changePrice(@RequestBody FeeManage car) {
+  public void changePrice(@RequestBody FeeManage car) {
     FeeManage parkFee = feeService.findFeeManageByCarType(car.getCarType());
     if (car.getHour()!=0)
      parkFee.setHour(car.getHour());
@@ -44,14 +44,6 @@ public class FeeController {
     if(car.getComment()!=null)
       parkFee.setComment(car.getComment());
     feeService.save(parkFee);
-    return Msg.success()
-            .add("id",parkFee.getId())
-            .add("hour",parkFee.getHour())
-            .add("carType",parkFee.getCarType())
-            .add("firstPrice",parkFee.getFirstPrice())
-            .add("secondPrice",parkFee.getSecondPrice())
-            .add("maxPrice",parkFee.getMaxPrice())
-            .add("comment",parkFee.getComment());
   }
 
 
