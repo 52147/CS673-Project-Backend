@@ -1,11 +1,17 @@
 package com.cs673.backend.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Integer id;
     @Column(unique = true)
     private String username;
@@ -13,10 +19,10 @@ public class User implements Serializable {
     private String password;
     @Column
     private int role;
-    @Transient
-    private int cardId;
-    @Transient
-    private String cardNum;
+//    @Transient
+//    private int cardId;
+//    @Transient
+//    private String cardNum;
 
     public Integer getId() {
         return id;
@@ -50,21 +56,21 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public int getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
-    }
-
-    public String getCardNum() {
-        return cardNum;
-    }
-
-    public void setCardNum(String cardNum) {
-        this.cardNum = cardNum;
-    }
+//    public int getCardId() {
+//        return cardId;
+//    }
+//
+//    public void setCardId(int cardId) {
+//        this.cardId = cardId;
+//    }
+//
+//    public String getCardNum() {
+//        return cardNum;
+//    }
+//
+//    public void setCardNum(String cardNum) {
+//        this.cardNum = cardNum;
+//    }
 
     @Override
     public String toString() {
