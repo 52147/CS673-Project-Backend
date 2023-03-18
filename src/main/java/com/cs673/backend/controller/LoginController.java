@@ -1,5 +1,6 @@
 package com.cs673.backend.controller;
 
+import cn.hutool.crypto.digest.BCrypt;
 import com.cs673.backend.entity.User;
 import com.cs673.backend.service.UserService;
 import com.cs673.backend.utils.JwtResponse;
@@ -26,10 +27,12 @@ public class LoginController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
-
-        if (!user.getPassword().equals(loginUser.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        if (!BCrypt.checkpw(loginUser.getPassword(), user.getPassword())) {
+            if (!user.getPassword().equals(loginUser.getPassword())) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            }
         }
+
 
         String token = jwtTokenUtil.generateToken(user);
 
