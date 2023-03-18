@@ -11,7 +11,7 @@
  Target Server Version : 50740 (5.7.40-log)
  File Encoding         : 65001
 
- Date: 17/03/2023 12:27:59
+ Date: 18/03/2023 14:27:14
 */
 
 SET NAMES utf8mb4;
@@ -88,14 +88,14 @@ CREATE TABLE `parkinfo`  (
   `plate` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `entrance` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `plate`(`plate`) USING BTREE,
-  CONSTRAINT `parkinfo_ibfk_1` FOREIGN KEY (`plate`) REFERENCES `persons` (`plate`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+  INDEX `plate`(`plate`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 -- ----------------------------
 -- Records of parkinfo
 -- ----------------------------
 BEGIN;
+INSERT INTO `parkinfo` (`id`, `park_num`, `card_num`, `plate`, `entrance`) VALUES (4, 0, NULL, '123', '2023-03-18 14:25:47');
 COMMIT;
 
 -- ----------------------------

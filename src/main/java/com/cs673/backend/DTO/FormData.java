@@ -110,6 +110,6 @@ public class FormData {
 
     @Override
     public String toString() {
-        return "FormData [id=" + id + ", parkNum=" + parkNum + ", cardNum=" + cardNum + ", plate=" + plate + ", entrance=" + entrance + ", exit=" + exit + ", tag=" + tag + "]";
+        return "FormData [id=" + id + ", park_Num=" + parkNum + ", card_Num=" + cardNum + ", plate=" + plate + ", entrance=" + entrance + ", exit=" + exit + ", tag=" + tag + "]";
     }
 }
