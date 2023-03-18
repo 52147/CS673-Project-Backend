@@ -65,7 +65,7 @@ CREATE TABLE `parkforall`  (
   `park_num` int(11) NULL DEFAULT NULL,
   `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `entrance` datetime NULL DEFAULT NULL,
-  `exit` datetime NULL DEFAULT NULL,
+  `exit_time` datetime NULL DEFAULT NULL,
   `parking_fee` int(11) NULL DEFAULT NULL,
   `total_parking_time` mediumtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
