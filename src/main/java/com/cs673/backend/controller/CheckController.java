@@ -55,6 +55,14 @@ public class CheckController {
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
         return Msg.success();
     }
+    
+    @ResponseBody
+    @GetMapping
+    @RequestMapping("/index/check/checkPlate")
+    public Msg CheckPlate(@RequestBody ParkInfo data){
+        ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
+        return Msg.success().add("parkinfo", parkInfo);
+    }
 
     @RequestMapping( "/index/check/checkIn/checkHistory")
     public List<ParkForAll> showHistory(){
