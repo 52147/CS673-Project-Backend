@@ -11,7 +11,7 @@
  Target Server Version : 50740 (5.7.40-log)
  File Encoding         : 65001
 
- Date: 18/03/2023 14:27:14
+ Date: 21/03/2023 14:50:33
 */
 
 SET NAMES utf8mb4;
@@ -75,6 +75,7 @@ CREATE TABLE `parkforall`  (
 -- Records of parkforall
 -- ----------------------------
 BEGIN;
+INSERT INTO `parkforall` (`id`, `card_num`, `park_num`, `plate`, `entrance`, `exit_time`, `parking_fee`, `total_parking_time`) VALUES (1, '123', 23, '213', '2023-03-18 14:40:27', '2023-03-18 16:40:19', 123, '231');
 COMMIT;
 
 -- ----------------------------
@@ -89,13 +90,13 @@ CREATE TABLE `parkinfo`  (
   `entrance` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `plate`(`plate`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 -- ----------------------------
 -- Records of parkinfo
 -- ----------------------------
 BEGIN;
-INSERT INTO `parkinfo` (`id`, `park_num`, `card_num`, `plate`, `entrance`) VALUES (4, 0, NULL, '123', '2023-03-18 14:25:47');
+INSERT INTO `parkinfo` (`id`, `park_num`, `card_num`, `plate`, `entrance`) VALUES (4, 0, NULL, '123', '2023-03-18 14:25:47'), (5, 0, NULL, 'gggg', '2023-03-18 14:37:46');
 COMMIT;
 
 -- ----------------------------
@@ -104,9 +105,10 @@ COMMIT;
 DROP TABLE IF EXISTS `parkslot`;
 CREATE TABLE `parkslot`  (
   `id` int(11) NOT NULL,
-  `tag` int(11) NULL DEFAULT NULL,
+  `type` varchar(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `park_id` int(11) NULL DEFAULT NULL,
   `status` int(11) NULL DEFAULT NULL,
+  `plate` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
@@ -121,13 +123,11 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `parkspace`;
 CREATE TABLE `parkspace`  (
-  `car` int(11) NULL DEFAULT NULL,
-  `electric_car` int(11) NULL DEFAULT NULL,
-  `truck` int(11) NULL DEFAULT NULL,
-  `van` int(11) NULL DEFAULT NULL,
-  `motor` int(11) NULL DEFAULT NULL,
-  `disabled` int(11) NULL DEFAULT NULL,
   `id` int(11) NOT NULL,
+  `block` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `space_num` int(11) NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `is_reserve` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
@@ -151,6 +151,53 @@ CREATE TABLE `payment`  (
 
 -- ----------------------------
 -- Records of payment
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for reservation
+-- ----------------------------
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE `reservation`  (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_am_1-2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_am_3-4` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_am_5-6` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_am_7-8` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_am_9-10` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_am_11-12` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_pm_1-2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_pm_3-4` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_pm_5-6` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_pm_7-8` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T_pm_9-10` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `T-pm_11-12` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+-- ----------------------------
+-- Records of reservation
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for reserves
+-- ----------------------------
+DROP TABLE IF EXISTS `reserves`;
+CREATE TABLE `reserves`  (
+  `id` int(11) NOT NULL,
+  `parking_space_id` int(11) NULL DEFAULT NULL,
+  `reserve_start` datetime NULL DEFAULT NULL,
+  `reserve_end` datetime NULL DEFAULT NULL,
+  `status` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+-- ----------------------------
+-- Records of reserves
 -- ----------------------------
 BEGIN;
 COMMIT;
