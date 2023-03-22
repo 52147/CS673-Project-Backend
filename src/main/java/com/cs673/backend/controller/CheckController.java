@@ -2,11 +2,13 @@ package com.cs673.backend.controller;
 
 import com.cs673.backend.DTO.FormData;
 
+import com.cs673.backend.entity.FeeManage;
 import com.cs673.backend.entity.ParkForAll;
 import com.cs673.backend.entity.ParkInfo;
 import com.cs673.backend.repository.ParkInfoRepo;
+import com.cs673.backend.repository.FeeRepo;
+import com.cs673.backend.service.FeeService;
 import com.cs673.backend.service.ParkForAllService;
-
 import com.cs673.backend.service.ParkInfoService;
 import com.cs673.backend.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ public class CheckController {
     private ParkInfoService parkinfoservice;
     @Autowired
     private ParkForAllService parkForAllService;
+
     
     @PostMapping
     @RequestMapping("/index/check/checkIn")
