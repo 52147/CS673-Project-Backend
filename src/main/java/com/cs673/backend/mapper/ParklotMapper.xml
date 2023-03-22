@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cs673.backend.mapper.ParklotMapper">
+
+    <update id="reset">
+        UPDATE parklot AS a, parklot AS b
+        SET a.A1 = b.B1, a.B1 = b.A1
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A2 = b.B2, a.B2 = b.A2
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A3 = b.B3, a.B3 = b.A3
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A4 = b.B4, a.B4 = b.A4
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A5 = b.B5, a.B5 = b.A5
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A6 = b.B6, a.B6 = b.A6
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A7 = b.B7, a.B7 = b.A7
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A8 = b.B8, a.B8 = b.A8
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A9 = b.B9, a.B9 = b.A9
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A10 = b.B10, a.B10 = b.A10
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A11 = b.B11, a.B11 = b.A11
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A12 = b.B12, a.B12 = b.A12
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A13 = b.B13, a.B13 = b.A13
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A14 = b.B14, a.B14 = b.A14
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A15 = b.B15, a.B15 = b.A15
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A16 = b.B16, a.B16 = b.A16
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A17= b.B17, a.B17= b.A17
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A18 = b.B18, a.B18 = b.A18
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A19 = b.B19, a.B19 = b.A19
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A20 = b.B20, a.B20 = b.A20
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A21 = b.B21, a.B21 = b.A21
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A22 = b.B22, a.B22 = b.A22
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A23 = b.B23, a.B23 = b.A23
+        WHERE a.id = b.id;
+        UPDATE parklot AS a, parklot AS b
+        SET a.A24 = b.B24, a.B24 = b.A24
+        WHERE a.id = b.id;
+
+    </update>
+
+
+</mapper>

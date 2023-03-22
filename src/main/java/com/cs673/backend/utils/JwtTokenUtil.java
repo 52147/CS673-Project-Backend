@@ -21,8 +21,9 @@ public class JwtTokenUtil {
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("sub", user.getUsername());
-        claims.put("iat", new Date());
+        claims.put("username", user.getUsername());
+        claims.put("role", user.getRole());
+        claims.put("start", new Date());
         claims.put("exp", new Date(System.currentTimeMillis() + expiration * 1000));
 
         return Jwts.builder()

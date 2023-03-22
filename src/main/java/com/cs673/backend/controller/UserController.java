@@ -32,12 +32,14 @@ public class UserController {
     private UserMapper userMapper;
 
     // 更新
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/save")
     public boolean save(@RequestBody User user) {
         return userService.saveOrUpdate(user);
     }
 
     // 新增
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/add")
     public boolean add(@RequestBody User user) {
         if(getUserByName(user.getUsername()).size()!=0){
@@ -112,6 +114,7 @@ public class UserController {
         writer.close();
 
     }
+
     @PostMapping("/import")
     public Boolean imp(@RequestParam("file") MultipartFile file) throws Exception {
         InputStream inputStream = file.getInputStream();
