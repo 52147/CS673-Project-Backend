@@ -87,14 +87,15 @@ public class CheckController {
     @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Exit")
     public Msg FindbyDate_Exit(@RequestParam("myParam1") String startDate, @RequestParam("myParam2") String endDate) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = formatter.parse(startDate);
-        System.out.println(date);
-        ParkForAll parkForAll = parkForAllService.findParkForAllByEntrance(date);
-        Date exit = parkForAll.getExit();
-        Date entrance = parkForAll.getEntrance();
-        long parkingTime = calTimeDiffInMinutes(entrance, exit);
+        Date startdate = formatter.parse(startDate);
+        Date enddate = formatter.parse(endDate);
+        System.out.println(startdate);
+        ParkForAll parkForAll = parkForAllService.findParkForAllByEntrance(startdate);
+//        Date exit = parkForAll.getExit();
+//        Date entrance = parkForAll.getEntrance();
+        long parkingTime = calTimeDiffInMinutes(startdate, enddate);
         BigDecimal parkingFee = calParkingFee(parkingTime);
-        return Msg.success().add("parkForAll", parkForAll).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
+        return Msg.success().add("parkForAll", parkForAll).add("parkingFee", parkingFee).add("exit", enddate).add("parkingtime", parkingtimeToString(parkingTime));
     }
 
     //用出库时间检查已经出去的车辆。使用数据库parkforall。
