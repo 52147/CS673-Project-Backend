@@ -4,12 +4,10 @@ package com.cs673.backend.serviceImp;
 import com.cs673.backend.entity.ParkInfo;
 import com.cs673.backend.repository.ParkForAllRepo;
 import com.cs673.backend.entity.ParkForAll;
-import com.cs673.backend.DTO.AllData;
 import com.cs673.backend.service.ParkForAllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -71,6 +69,14 @@ public class ParkForAllServiceImp implements  ParkForAllService{
 
         long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiffMillis);
         return minutes;
+    }
+
+    public ParkForAll findParkForAllByEntranceAndExit(Date startDate, Date endDate){
+        return parkForAllRepo.findParkForAllByEntranceBetween(startDate, endDate);
+    }
+
+    public List<ParkForAll> findParkForAllByEntranceAndExitBetween(Date startDate, Date endDate){
+        return parkForAllRepo.findParkForAllByEntranceBetweenOrExitBetween(startDate, endDate, startDate, endDate);
     }
 
     public BigDecimal calParkingFee(long minutes) {

@@ -90,12 +90,11 @@ public class CheckController {
         Date startdate = formatter.parse(startDate);
         Date enddate = formatter.parse(endDate);
         System.out.println(startdate);
-        ParkForAll parkForAll = parkForAllService.findParkForAllByEntrance(startdate);
+        List<ParkForAll> parkForAll = parkForAllService.findParkForAllByEntranceAndExitBetween(startdate, enddate);
+        System.out.println(parkForAll);
 //        Date exit = parkForAll.getExit();
 //        Date entrance = parkForAll.getEntrance();
-        long parkingTime = calTimeDiffInMinutes(startdate, enddate);
-        BigDecimal parkingFee = calParkingFee(parkingTime);
-        return Msg.success().add("parkForAll", parkForAll).add("parkingFee", parkingFee).add("exit", enddate).add("parkingtime", parkingtimeToString(parkingTime));
+        return Msg.success().add("parkForAll", parkForAll);
     }
 
     //用出库时间检查已经出去的车辆。使用数据库parkforall。

@@ -26,4 +26,8 @@ public interface ParkForAllService {
     public ParkForAll findParkForAllByEntrance(Date entrance);
 
     public ParkForAll findParkForAllByExit(Date exit);
+
+    ParkForAll findParkForAllByEntranceAndExit(Date startDate, Date endDate);
+
+    List<ParkForAll> findParkForAllByEntranceAndExitBetween(Date startDate, Date endDate);
 }
