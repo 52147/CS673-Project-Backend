@@ -18,6 +18,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Time;
@@ -70,12 +73,23 @@ public class CheckController {
         return parkingHistoryPage;
     }
 
+    @ResponseBody
+    @GetMapping
+    @RequestMapping("/index/check/checkIn/checkHistory/checkPlate")
+    public Msg CheckAllPlate(@RequestBody ParkForAll data){
+        ParkForAll parkForAll = parkForAllService.findParkForAllByPlate(data.getPlate());
+        return Msg.success().add("parkforall", parkForAll);
+    }
 
+    //@RequestParam("name") String name),
     //用出库时间检查已经出去的车辆。使用数据库parkforall。
     @GetMapping
     @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Exit")
-    public Msg FindbyDate_Exit(@RequestBody ParkForAll data){
-        ParkForAll parkForAll = parkForAllService.findParkForAllByEntrance(data.getEntrance());
+    public Msg FindbyDate_Exit(@RequestParam("myParam1") String startDate, @RequestParam("myParam2") String endDate) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = formatter.parse(startDate);
+        System.out.println(date);
+        ParkForAll parkForAll = parkForAllService.findParkForAllByEntrance(date);
         Date exit = parkForAll.getExit();
         Date entrance = parkForAll.getEntrance();
         long parkingTime = calTimeDiffInMinutes(entrance, exit);

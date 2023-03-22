@@ -21,6 +21,8 @@ public interface ParkForAllService {
     Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id);
 
 
+    public ParkForAll findParkForAllByPlate(String plate);
+
     public ParkForAll findParkForAllByEntrance(Date entrance);
 
     public ParkForAll findParkForAllByExit(Date exit);

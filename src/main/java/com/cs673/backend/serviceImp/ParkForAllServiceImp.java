@@ -53,6 +53,11 @@ public class ParkForAllServiceImp implements  ParkForAllService{
     public Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id){return parkForAllRepo.findAllByOrderByIdDesc(id);}
 
     @Override
+    public ParkForAll findParkForAllByPlate(String plate) {
+        return parkForAllRepo.findParkForAllByPlate(plate);
+    }
+
+    @Override
     public ParkForAll findParkForAllByEntrance(Date entrance) {
         return parkForAllRepo.findParkForAllByEntrance(entrance);
     }
