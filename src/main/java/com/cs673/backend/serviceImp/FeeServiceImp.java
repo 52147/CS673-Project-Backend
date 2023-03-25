@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -22,5 +23,16 @@ public class FeeServiceImp implements FeeService {
     public void save(FeeManage feeManage){
         feeRepo.save(feeManage);
     }
+
+//    @Override
+//    public FeeManage findFirst() {
+//        return feeRepo.findOne();
+//    }
+
+//    public float getParkFee(long mins) {
+//        float hours = mins / 60;
+//        return hours;
+//    }
+
 
 }

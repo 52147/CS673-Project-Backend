@@ -37,6 +37,9 @@ public class CheckController {
     @Autowired
     private ParkForAllService parkForAllService;
 
+    @Autowired
+    private FeeService feeService;
+
     
     @PostMapping
     @RequestMapping("/index/check/checkIn")
@@ -64,6 +67,12 @@ public class CheckController {
     @RequestMapping("/index/check/checkPlate")
     public Msg CheckPlate(@RequestBody ParkInfo data){
         ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
+//        FeeManage feeManage = feeService.findFirst();
+        Date now = new Date();
+        Date entrance = parkInfo.getEntrance();
+
+        long parkingTime = calTimeDiffInMinutes(entrance, now);
+        BigDecimal parkingFee = calParkingFee(parkingTime);
         return Msg.success().add("parkinfo", parkInfo);
     }
 
@@ -85,7 +94,7 @@ public class CheckController {
     //用出库时间检查已经出去的车辆。使用数据库parkforall。
     @GetMapping
     @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Exit")
-    public Msg FindbyDate_Exit(@RequestParam("myParam1") String startDate, @RequestParam("myParam2") String endDate) throws ParseException {
+    public List<ParkForAll> FindbyDate_Exit(@RequestParam("myParam1") String startDate, @RequestParam("myParam2") String endDate) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date startdate = formatter.parse(startDate);
         Date enddate = formatter.parse(endDate);
@@ -94,7 +103,7 @@ public class CheckController {
         System.out.println(parkForAll);
 //        Date exit = parkForAll.getExit();
 //        Date entrance = parkForAll.getEntrance();
-        return Msg.success().add("parkForAll", parkForAll);
+        return parkForAll;
     }
 
     //用出库时间检查已经出去的车辆。使用数据库parkforall。

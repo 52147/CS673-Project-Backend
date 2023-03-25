@@ -9,4 +9,6 @@ import java.util.List;
 public interface FeeService {
     public FeeManage findFeeManageByCarType(String carType);
     public void save(FeeManage feeManage);
+
+//    public FeeManage findFirst();
 }
