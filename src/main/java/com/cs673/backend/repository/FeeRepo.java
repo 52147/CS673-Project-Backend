@@ -9,6 +9,4 @@ import java.util.List;
 public interface FeeRepo extends JpaRepository<FeeManage, Integer> {
     FeeManage findFeeManageByCarType(String carType);
 
-//    FeeManage findOne();
-
 }

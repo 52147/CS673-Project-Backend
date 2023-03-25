@@ -67,13 +67,12 @@ public class CheckController {
     @RequestMapping("/index/check/checkPlate")
     public Msg CheckPlate(@RequestBody ParkInfo data){
         ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
-//        FeeManage feeManage = feeService.findFirst();
         Date now = new Date();
         Date entrance = parkInfo.getEntrance();
 
         long parkingTime = calTimeDiffInMinutes(entrance, now);
-        BigDecimal parkingFee = calParkingFee(parkingTime);
-        return Msg.success().add("parkinfo", parkInfo);
+        BigDecimal parkingFee = feeService.getParkingFee(parkingTime, "normal");
+        return Msg.success().add("parkinfo", parkInfo).add("parking_time", parkingTime).add("parkingFee", parkingFee);
     }
 
     @RequestMapping( "/index/check/checkIn/checkHistory")
