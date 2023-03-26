@@ -1,8 +1,10 @@
 package com.cs673.backend.repository;
 
+import com.cs673.backend.entity.ParkForAll;
 import com.cs673.backend.entity.ParkInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Date;
 import java.util.Optional;
 
 public interface ParkInfoRepo extends JpaRepository<ParkInfo, Integer> {
@@ -12,6 +14,8 @@ public interface ParkInfoRepo extends JpaRepository<ParkInfo, Integer> {
 
 
     ParkInfo findParkInfoByParkNum(int parkNum);
+
+    ParkInfo findParkInfoByEntrance(Date entrance);
 
     ParkInfo findParkInfoByPlate(String plate);
 

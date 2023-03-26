@@ -18,6 +18,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Time;
@@ -33,6 +36,9 @@ public class CheckController {
     private ParkInfoService parkinfoservice;
     @Autowired
     private ParkForAllService parkForAllService;
+
+    @Autowired
+    private FeeService feeService;
 
     
     @PostMapping
@@ -55,7 +61,19 @@ public class CheckController {
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
         return Msg.success();
     }
+    
+    @ResponseBody
+    @GetMapping
+    @RequestMapping("/index/check/checkPlate")
+    public Msg CheckPlate(@RequestBody ParkInfo data){
+        ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
+        Date now = new Date();
+        Date entrance = parkInfo.getEntrance();
 
+        long parkingTime = calTimeDiffInMinutes(entrance, now);
+        BigDecimal parkingFee = feeService.getParkingFee(parkingTime, "normal");
+        return Msg.success().add("parkinfo", parkInfo).add("parking_time", parkingTime).add("parkingFee", parkingFee);
+    }
 
     @RequestMapping( "/index/check/checkIn/checkHistory")
     public List<ParkForAll> showHistory(){
@@ -63,17 +81,43 @@ public class CheckController {
         return parkingHistoryPage;
     }
 
-
+    @ResponseBody
     @GetMapping
-    @RequestMapping("/index/check/checkPlate")
-    public Msg CheckPlate(@RequestBody ParkInfo data){
-        ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
-        Date exit = new Date();
-        Date entrance = parkInfo.getEntrance();
+    @RequestMapping("/index/check/checkIn/checkHistory/checkPlate")
+    public Msg CheckAllPlate(@RequestBody ParkForAll data){
+        ParkForAll parkForAll = parkForAllService.findParkForAllByPlate(data.getPlate());
+        return Msg.success().add("parkforall", parkForAll);
+    }
+
+    //@RequestParam("name") String name),
+    //用出库时间检查已经出去的车辆。使用数据库parkforall。
+    @GetMapping
+    @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Exit")
+    public List<ParkForAll> FindbyDate_Exit(@RequestParam("myParam1") String startDate, @RequestParam("myParam2") String endDate) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date startdate = formatter.parse(startDate);
+        Date enddate = formatter.parse(endDate);
+        System.out.println(startdate);
+        List<ParkForAll> parkForAll = parkForAllService.findParkForAllByEntranceAndExitBetween(startdate, enddate);
+        System.out.println(parkForAll);
+//        Date exit = parkForAll.getExit();
+//        Date entrance = parkForAll.getEntrance();
+        return parkForAll;
+    }
+
+    //用出库时间检查已经出去的车辆。使用数据库parkforall。
+    @GetMapping
+    @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Entrance_Done")
+    public Msg FindbyDate_Entrance_Done(@RequestBody ParkForAll data){
+        ParkForAll parkForAll = parkForAllService.findParkForAllByExit(data.getExit());
+        Date exit = parkForAll.getExit();
+        Date entrance = parkForAll.getEntrance();
         long parkingTime = calTimeDiffInMinutes(entrance, exit);
         BigDecimal parkingFee = calParkingFee(parkingTime);
-        return Msg.success().add("parkInfo", parkInfo).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
+        return Msg.success().add("parkForAll", parkForAll).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
     }
+
+
 
     @GetMapping
     @RequestMapping("/index/check/checkNum")
