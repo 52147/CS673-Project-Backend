@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cs673.backend.entity.Appointment;
 import com.cs673.backend.entity.Parklot;
+import com.cs673.backend.entity.Appointment;
 import com.cs673.backend.mapper.ParklotMapper;
+import com.cs673.backend.service.AppointmentService;
 import com.cs673.backend.service.ParklotService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,9 @@ import java.util.List;
 public class ParklotController {
     @Resource
     private ParklotService parklotService;
+
+    @Resource
+    private AppointmentService appointmentService;
 
     @Resource
     private ParklotMapper parklotMapper;
@@ -235,8 +241,43 @@ public class ParklotController {
 
     // 更新
     @PostMapping("/save")
-    public boolean save(@RequestBody Parklot parklot) {
+    public boolean save(@RequestBody Parklot parklot,
+                        @RequestParam String date,
+                        @RequestParam String license,
+                        @RequestParam String name) {
+        Appointment appointment = new Appointment();
+        appointment.setDate(date);
+        appointment.setParklot(parklot.getId());
+        appointment.setName(name);
+        appointment.setLicense(license);
+        appointmentService.saveOrUpdate(appointment);
         return parklotService.saveOrUpdate(parklot);
+    }
+
+    //生成预约记录
+    @PostMapping("/appointment")
+    public boolean save(@RequestParam Integer parklotId,
+                        @RequestParam String date,
+                        @RequestParam String license,
+                        @RequestParam String name) {
+        Appointment appointment = new Appointment();
+        appointment.setDate(date);
+        appointment.setParklot(parklotId);
+        appointment.setName(name);
+        appointment.setLicense(license);
+        return appointmentService.saveOrUpdate(appointment);
+    }
+
+    @GetMapping("/appointment/showAll")
+    public List<Appointment> showAll() {
+        return appointmentService.list();
+    }
+
+    @GetMapping("/appointment/showUser")
+    public List<Appointment> showUser(@RequestParam String userName) {
+        QueryWrapper<Appointment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("name", userName);
+        return appointmentService.list();
     }
 
     // 统计
@@ -277,7 +318,6 @@ public class ParklotController {
         updateWrapper.set("B22","EMPTY");
         updateWrapper.set("B23","EMPTY");
         updateWrapper.set("B24","EMPTY");
-
         parklotMapper.update(null,updateWrapper);
     }
 
