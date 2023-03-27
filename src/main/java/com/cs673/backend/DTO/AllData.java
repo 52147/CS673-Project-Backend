@@ -10,7 +10,9 @@ public class AllData {
     private String parkIn;
     private String parkOut;
     private int payAmount;
+    private String carType;
     public AllData(@JsonProperty("id") int id,
+                   @JsonProperty("carType") String carType,
                    @JsonProperty("carNum") String cardNum,
                    @JsonProperty("parkNum") String parkNum,
                    @JsonProperty("parkIn") String parkIn,
@@ -23,6 +25,7 @@ public class AllData {
         this.parkIn = parkIn;
         this.parkOut=parkOut;
         this.payAmount = payAmount;
+        this.carType =carType;
     }
     public int getId() {
         return id;
@@ -30,6 +33,8 @@ public class AllData {
     public void setId(int id) {
         this.id = id;
     }
+    public String getCarType(){return this.carType;}
+    public void setCarType(String carType){this.carType=carType;}
     public String getCarNum() {
         return carNum;
     }
