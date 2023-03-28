@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `billtable`;
 CREATE TABLE `billtable`  (
   `id` int(11) NOT NULL,
   `hour` int(11) NULL DEFAULT NULL,
-  `cartype` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
-  `firstprice` int(255) NULL DEFAULT NULL,
-  `secondprice` int(11) NULL DEFAULT NULL,
-  `maxprice` int(11) NULL DEFAULT NULL,
+  `car_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
+  `first_price` int(255) NULL DEFAULT NULL,
+  `second_price` int(11) NULL DEFAULT NULL,
+  `max_price` int(11) NULL DEFAULT NULL,
   `comment` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
@@ -36,6 +36,7 @@ CREATE TABLE `billtable`  (
 -- Records of billtable
 -- ----------------------------
 BEGIN;
+INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (1, '1', 'normal', 0, 5, 40,'');
 COMMIT;
 
 -- ----------------------------
