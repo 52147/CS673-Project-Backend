@@ -289,7 +289,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 BEGIN;
 INSERT INTO `user` (id, username, password, role) VALUES (1, "admin", "admin", 1);
-INSERT INTO `user` (id, username, password, role) VALUES (1, "admin1", "admin1", 2);
+INSERT INTO `user` (id, username, password, role) VALUES (2, "admin1", "admin1", 2);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
