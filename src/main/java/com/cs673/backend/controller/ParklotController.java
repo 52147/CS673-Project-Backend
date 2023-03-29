@@ -26,6 +26,9 @@ public class ParklotController {
 
     @Resource
     private ParklotMapper parklotMapper;
+    
+    @Resource
+    private AppointmentMapper appointmentMapper;
 
     //显示全部预约信息
     @GetMapping
@@ -277,7 +280,7 @@ public class ParklotController {
     public List<Appointment> showUser(@RequestParam String userName) {
         QueryWrapper<Appointment> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("name", userName);
-        return appointmentService.list();
+        return appointmentMapper.selectList(queryWrapper);
     }
 
     // 统计
