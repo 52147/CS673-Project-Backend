@@ -36,7 +36,9 @@ CREATE TABLE `billtable`  (
 -- Records of billtable
 -- ----------------------------
 BEGIN;
-INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (1, '1', 'normal', 0, 5, 40,'');
+INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (1, '1', 'car', 0, 5, 40,'');
+INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (2, '1', 'motorcycle', 0, 5, 40,'');
+INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (3, '1', 'bicycle', 0, 5, 40,'');
 COMMIT;
 
 -- ----------------------------
@@ -286,6 +288,8 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 BEGIN;
+INSERT INTO `user` (id, username, password, role) VALUES (1, "admin", "admin", 1);
+INSERT INTO `user` (id, username, password, role) VALUES (1, "admin1", "admin1", 2);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

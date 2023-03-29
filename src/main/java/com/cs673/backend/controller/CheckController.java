@@ -73,7 +73,7 @@ public class CheckController {
         Date entrance = parkInfo.getEntrance();
 
         long parkingTime = calTimeDiffInMinutes(entrance, now);
-        BigDecimal parkingFee = feeService.getParkingFee(parkingTime, "normal");
+        BigDecimal parkingFee = feeService.getParkingFee(parkingTime, "Car");
         return Msg.success().add("parkinfo", parkInfo).add("parking_time", parkingTime).add("parkingFee", parkingFee).add("exit", now);
     }
 
