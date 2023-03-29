@@ -13,7 +13,7 @@ public interface ParkForAllService {
 
     List<ParkForAll> findAllParkInForAll();
 
-    void save(ParkInfo parkinfo);
+    void save(ParkForAll parkinfo);
 
     //AllData findById(int id);
 

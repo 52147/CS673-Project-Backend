@@ -53,11 +53,13 @@ public class CheckController {
     }
 
     @RequestMapping("/index/check/checkOut")
-    public Msg checkOut(@RequestBody ParkInfo data) {
+    public Msg checkOut(@RequestBody ParkForAll data) {
         ParkInfo parkinfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
-
-        //Transfer parkinfo to parkforall
-        parkForAllService.save(parkinfo);
+        data.setCardNum(parkinfo.getCardNum());
+        data.setEntrance(parkinfo.getEntrance());
+        data.setCarType(parkinfo.getCarType());
+        data.setParkNum(parkinfo.getParkNum());
+        parkForAllService.save(data);
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
         return Msg.success();
     }
@@ -72,7 +74,7 @@ public class CheckController {
 
         long parkingTime = calTimeDiffInMinutes(entrance, now);
         BigDecimal parkingFee = feeService.getParkingFee(parkingTime, "normal");
-        return Msg.success().add("parkinfo", parkInfo).add("parking_time", parkingTime).add("parkingFee", parkingFee);
+        return Msg.success().add("parkinfo", parkInfo).add("parking_time", parkingTime).add("parkingFee", parkingFee).add("exit", now);
     }
 
     @RequestMapping( "/index/check/checkIn/checkHistory")

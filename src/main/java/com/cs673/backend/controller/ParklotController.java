@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cs673.backend.entity.Appointment;
 import com.cs673.backend.entity.Parklot;
 import com.cs673.backend.entity.Appointment;
+import com.cs673.backend.mapper.AppointmentMapper;
 import com.cs673.backend.mapper.ParklotMapper;
 import com.cs673.backend.service.AppointmentService;
 import com.cs673.backend.service.ParklotService;

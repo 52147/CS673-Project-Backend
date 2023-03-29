@@ -25,20 +25,7 @@ public class ParkForAllServiceImp implements  ParkForAllService{
 //        return parkForAllRepo.findParkInfoByParkNum(parkNum);
 //    }
     @Override
-    public void save(ParkInfo parkinfo) {
-        Date exit = new Date();
-        Date entrance = parkinfo.getEntrance();
-        long totalParkingTime = calTimeDiffInMinutes(entrance, exit);
-        BigDecimal parkingFee = calParkingFee(totalParkingTime);
-
-        ParkForAll parkforall = new ParkForAll();
-        parkforall.setCardNum(parkinfo.getCardNum());
-        parkforall.setParkNum(parkinfo.getParkNum());
-        parkforall.setPlate(parkinfo.getPlate());
-        parkforall.setEntrance(entrance);
-        parkforall.setExit(exit);
-        parkforall.setTotalParkingTime(totalParkingTime);
-        parkforall.setParkingFee(parkingFee);
+    public void save(ParkForAll parkforall) {
         parkForAllRepo.save(parkforall);
     }
     //@Override
