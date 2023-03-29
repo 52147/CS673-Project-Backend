@@ -59,7 +59,7 @@ public class CheckController {
         data.setEntrance(parkinfo.getEntrance());
         data.setCarType(parkinfo.getCarType());
         data.setParkNum(parkinfo.getParkNum());
-        parkForAllService.save(data);
+        System.out.println(data.getId());
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
         return Msg.success();
     }
