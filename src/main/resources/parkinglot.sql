@@ -11,11 +11,30 @@
  Target Server Version : 50740 (5.7.40-log)
  File Encoding         : 65001
 
- Date: 27/03/2023 16:47:13
+ Date: 03/04/2023 02:03:47
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for appointment
+-- ----------------------------
+DROP TABLE IF EXISTS `appointment`;
+CREATE TABLE `appointment`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `date` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `license` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `parklot` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+
+-- ----------------------------
+-- Records of appointment
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for billtable
@@ -36,9 +55,7 @@ CREATE TABLE `billtable`  (
 -- Records of billtable
 -- ----------------------------
 BEGIN;
-INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (1, '1', 'car', 0, 5, 40,'');
-INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (2, '1', 'motorcycle', 0, 5, 40,'');
-INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUE (3, '1', 'bicycle', 0, 5, 40,'');
+INSERT INTO `billtable` (`id`, `hour`, `car_type`, `first_price`, `second_price`, `max_price`, `comment`) VALUES (1, 1, 'car', 0, 5, 40, ''), (2, 1, 'motorcycle', 0, 5, 40, ''), (3, 1, 'bicycle', 0, 5, 40, '');
 COMMIT;
 
 -- ----------------------------
@@ -59,6 +76,25 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
+-- Table structure for member
+-- ----------------------------
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member`  (
+  `id` int(11) NOT NULL,
+  `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `permite_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `start_time` datetime NULL DEFAULT NULL,
+  `end_time` datetime NULL DEFAULT NULL,
+  `user_id` int(11) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+-- ----------------------------
+-- Records of member
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for parkforall
 -- ----------------------------
 DROP TABLE IF EXISTS `parkforall`;
@@ -73,7 +109,7 @@ CREATE TABLE `parkforall`  (
   `total_parking_time` mediumtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `car_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
 -- ----------------------------
 -- Records of parkforall
@@ -160,13 +196,12 @@ CREATE TABLE `parklot`  (
   `B23` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
   `B24` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 810 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 -- ----------------------------
 -- Records of parklot
 -- ----------------------------
 BEGIN;
-INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `A8`, `A9`, `A10`, `A11`, `A12`, `A13`, `A14`, `A15`, `A16`, `A17`, `A18`, `A19`, `A20`, `A21`, `A22`, `A23`, `A24`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `B8`, `B9`, `B10`, `B11`, `B12`, `B13`, `B14`, `B15`, `B16`, `B17`, `B18`, `B19`, `B20`, `B21`, `B22`, `B23`, `B24`) VALUES (1, '机动车', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY'), (2, '非机动车', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY'), (3, '机动车', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY'), (4, '机动车', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY'), (5, '非机动车', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY'), (6, '机动车', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY');
 COMMIT;
 
 -- ----------------------------
@@ -288,8 +323,7 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` (id, username, password, role) VALUES (1, "admin", "admin", 1);
-INSERT INTO `user` (id, username, password, role) VALUES (2, "admin1", "admin1", 2);
+INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (1, 'admin', 'admin', 1), (2, 'admin1', 'admin1', 2);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
