@@ -53,8 +53,9 @@ public class CheckController {
         data.setCarType(parkinfo.getCarType());
         data.setParkNum(parkinfo.getParkNum());
         System.out.println(data.getId());
+        parkForAllService.save(data);
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
-        return Msg.success().add("parkin",data.getEntrance()).add("parkout",data.getExit());
+        return Msg.success();
     }
 
     public boolean checkOverdue(ParkInfo data){
