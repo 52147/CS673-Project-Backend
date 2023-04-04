@@ -53,7 +53,6 @@ public class CheckController {
         data.setCarType(parkinfo.getCarType());
         data.setParkNum(parkinfo.getParkNum());
         System.out.println(data.getId());
-        parkForAllService.save(parkForAllService.findParkForAllByEntrance(data.getEntrance()));
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
         return Msg.success().add("parkin",data.getEntrance()).add("parkout",data.getExit());
     }
