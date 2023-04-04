@@ -30,7 +30,7 @@ public class UserServiceImp extends ServiceImpl<UserMapper, User>  implements Us
     }
     @Override
     public User changePassword(String username, String oldpassword, String newpassword) {
-        return userRepository.changePassword(username, oldpassword,newpassword);
+        return userRepository.changePassword(username, oldpassword, newpassword);
     }
 
     @Override

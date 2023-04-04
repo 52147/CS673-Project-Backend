@@ -13,7 +13,7 @@ public class PasswordController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/forgotPassword")
+    @RequestMapping("/forget")
     @PutMapping("")
     public ResponseEntity<?> changePassword(@RequestBody User loginUser) {
         try {
