@@ -48,22 +48,4 @@ public class FeeController {
     feeService.save(parkFee);
   }
 
-  @PostMapping
-  @RequestMapping("/index/check/countPrice")
-  public Msg countPrice(@RequestParam String carType,@RequestParam float hour){
-    int price =0;
-    FeeManage parkFee = feeService.findFeeManageByCarType(carType.toLowerCase());
-    if(hour<1){
-      price += parkFee.getFirstPrice();
-    }
-    else if(hour>=1 && hour<=5){
-      price+=(hour-1)*parkFee.getSecondPrice();
-    }
-    else{
-      price+=parkFee.getMaxPrice();
-    }
-    return Msg.success().add("price",price);
-  }
-
-
 }

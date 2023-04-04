@@ -1,21 +1,14 @@
 package com.cs673.backend.controller;
 
-import com.cs673.backend.DTO.FormData;
-
-import com.cs673.backend.entity.FeeManage;
+import com.cs673.backend.entity.MemberShip;
 import com.cs673.backend.entity.ParkForAll;
 import com.cs673.backend.entity.ParkInfo;
-import com.cs673.backend.repository.ParkInfoRepo;
-import com.cs673.backend.repository.FeeRepo;
 import com.cs673.backend.service.FeeService;
 import com.cs673.backend.service.ParkForAllService;
 import com.cs673.backend.service.ParkInfoService;
+import com.cs673.backend.service.MembershipService;
 import com.cs673.backend.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -23,10 +16,8 @@ import java.text.SimpleDateFormat;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -37,6 +28,8 @@ public class CheckController {
     @Autowired
     private ParkForAllService parkForAllService;
 
+    @Autowired
+    private MembershipService membershipService;
     @Autowired
     private FeeService feeService;
 
@@ -60,10 +53,23 @@ public class CheckController {
         data.setCarType(parkinfo.getCarType());
         data.setParkNum(parkinfo.getParkNum());
         System.out.println(data.getId());
+        parkForAllService.save(data);
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
         return Msg.success();
     }
-    
+
+    public boolean checkOverdue(ParkInfo data){
+        MemberShip membership = membershipService.findMembershipByPlate(data.getPlate());
+        Date endTime = membership.getEndTime();
+        Date now = new Date();
+        int result = endTime.compareTo(now);
+        if (result <= 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
     @ResponseBody
     @GetMapping
     @RequestMapping("/index/check/checkPlate")
@@ -71,9 +77,14 @@ public class CheckController {
         ParkInfo parkInfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
         Date now = new Date();
         Date entrance = parkInfo.getEntrance();
-
         long parkingTime = calTimeDiffInMinutes(entrance, now);
-        BigDecimal parkingFee = feeService.getParkingFee(parkingTime, "Car");
+        BigDecimal parkingFee;
+        if(checkOverdue(data)){
+            parkingFee= BigDecimal.valueOf(0);
+        }
+        else {
+            parkingFee = feeService.getParkingFee(parkingTime, "Car");
+        }
         return Msg.success().add("parkinfo", parkInfo).add("parking_time", parkingTime).add("parkingFee", parkingFee).add("exit", now);
     }
 
