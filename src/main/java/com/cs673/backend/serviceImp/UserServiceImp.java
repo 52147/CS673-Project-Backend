@@ -50,6 +50,13 @@ public class UserServiceImp extends ServiceImpl<UserMapper, User>  implements Us
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", userDTO.getUsername());
         queryWrapper.eq("password", userDTO.getPassword());
+        queryWrapper.eq("phone", userDTO.getPhone());
+        queryWrapper.eq("email", userDTO.getEmail());
+        queryWrapper.eq("address", userDTO.getAddress());
+        queryWrapper.eq("Q1", userDTO.getQ1());
+        queryWrapper.eq("A1", userDTO.getA1());
+        queryWrapper.eq("Q2", userDTO.getQ2());
+        queryWrapper.eq("A2", userDTO.getA2());
         User one;
         try {
             one = getOne(queryWrapper);
