@@ -21,6 +21,8 @@ public interface UserService extends IService<User> {
 
     User register(UserDTO userDTO);
 
+    User changePassword(String username, String oldpassword, String newpassword);
+
     //UserDTO login(UserDTO userDTO);
 
     //User register(UserDTO userDTO);
