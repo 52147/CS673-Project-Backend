@@ -71,15 +71,17 @@ public class CheckController {
     // 车牌没有membership怎么办？
     public boolean checkOverdue(ParkInfo data){
         MemberShip membership = membershipService.findMembershipByPlate(data.getPlate());
-        Date endTime = membership.getEndTime();
-        Date now = new Date();
-        int result = endTime.compareTo(now);
-        if (result <= 0){
-            return false;
+        if(membership!=null) {
+            Date endTime = membership.getEndTime();
+            Date now = new Date();
+            int result = endTime.compareTo(now);
+            if (result <= 0) {
+                return false;
+            } else {
+                return true;
+            }
         }
-        else{
-            return true;
-        }
+        return false;
     }
     @ResponseBody
     @GetMapping

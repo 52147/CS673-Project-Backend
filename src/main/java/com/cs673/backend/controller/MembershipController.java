@@ -20,12 +20,6 @@ public class MembershipController {
   private MembershipService membershipService;
 
   private ParkInfoService parkInfoService;
-  @PostMapping
-  @RequestMapping("/check/index/check/checkIn/purchasePermit")
-  public int purchasePermit(@RequestBody MemberShip memberShip){
-    int month = calTimeDiffInMonth(memberShip.getStartTime(),memberShip.getEndTime());
-    return calMemberFee(month);
-  }
 
   @RequestMapping("/check/index/check/checkIn/purchasePermit/Successful")
   public void purchasePermitSuccessful(@RequestBody MemberShip memberShip){
@@ -63,18 +57,4 @@ public class MembershipController {
     return months;
   }
 
-  public int calMemberFee(int month){
-    if(month<6){
-      return 200*month;
-    }
-    else if(month>=6 && month<12){
-      return 180*month;
-    }
-    else if(month==12){
-      return 1500;
-    }
-    else{
-      return 100*month;
-    }
-  }
 }
