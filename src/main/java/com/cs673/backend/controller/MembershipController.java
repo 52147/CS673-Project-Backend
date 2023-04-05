@@ -1,8 +1,9 @@
 package com.cs673.backend.controller;
 
 
+import com.cs673.backend.entity.MemberFeeStandard;
 import com.cs673.backend.entity.MemberShip;
-import com.cs673.backend.entity.ParkForAll;
+import com.cs673.backend.service.MemberFeeService;
 import com.cs673.backend.service.MembershipService;
 import com.cs673.backend.service.ParkInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class MembershipController {
   @Autowired
   private MembershipService membershipService;
 
+  @Autowired
+  private MemberFeeService memberFeeService;
+
   private ParkInfoService parkInfoService;
 
   @RequestMapping("/check/index/check/checkIn/purchasePermit/Successful")
@@ -34,15 +38,37 @@ public class MembershipController {
 
   @PostMapping
   @RequestMapping("/check/index/check/checkIn/checkPermitByPlate")
-  public MemberShip checkPermitByPlate(@RequestParam String plate){
-    return membershipService.findMembershipByPlate(plate);
+  public MemberShip checkPermitByPlate(@RequestBody MemberShip memberShip){
+    return membershipService.findMembershipByPlate(memberShip.getPlate());
   }
 
   @PostMapping
   @RequestMapping("/check/index/check/checkIn/checkPermitByUserId")
-  public MemberShip checkPermitByUserId(@RequestParam("p1") String userId){
-    return membershipService.findMemberShipByUserId(userId);
+  public MemberShip checkPermitByUserId(@RequestBody MemberShip memberShip){
+    return membershipService.findMemberShipByUserId(memberShip.getUserId());
   }
+
+  @PostMapping
+  @RequestMapping("/check/index/check/checkIn/changeMemberPrice")
+  public void changeMemberPrice(@RequestBody MemberFeeStandard memberFeeStandard){
+    MemberFeeStandard tmpStandard = memberFeeService.findMemberFeeStandardById(1);
+    if(memberFeeStandard.getMonthlyPay()!=tmpStandard.getMonthlyPay()){
+      tmpStandard.setMonthlyPay(memberFeeStandard.getMonthlyPay());
+    }
+    if(memberFeeStandard.getYearlyPay()!=tmpStandard.getYearlyPay()){
+      tmpStandard.setYearlyPay(memberFeeStandard.getYearlyPay());
+    }
+    memberFeeService.save(tmpStandard);
+  }
+
+  @PostMapping
+  @RequestMapping("/check/index/check/checkIn/showMemberPrice")
+  public MemberFeeStandard showMemberPrice(){
+    return memberFeeService.findMemberFeeStandardById(1);
+  }
+
+
+
 
   public int calTimeDiffInMonth(Date date1, Date date2){
     Calendar cal1 = Calendar.getInstance();
