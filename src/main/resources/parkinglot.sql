@@ -73,6 +73,7 @@ CREATE TABLE `garage`  (
 -- Records of garage
 -- ----------------------------
 BEGIN;
+INSERT INTO `garage` (`id`, `total_spots`, `current_spots`) VALUES (1, 100, 100);
 COMMIT;
 
 -- ----------------------------
@@ -82,7 +83,7 @@ DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member`  (
   `id` int(11) NOT NULL,
   `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `permite_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `permit_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `start_time` datetime NULL DEFAULT NULL,
   `end_time` datetime NULL DEFAULT NULL,
   `user_id` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL
