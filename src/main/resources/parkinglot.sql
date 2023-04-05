@@ -224,24 +224,6 @@ CREATE TABLE `parkslot`  (
 BEGIN;
 COMMIT;
 
--- ----------------------------
--- Table structure for parkspace
--- ----------------------------
-DROP TABLE IF EXISTS `parkspace`;
-CREATE TABLE `parkspace`  (
-  `id` int(11) NOT NULL,
-  `block` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `space_num` int(11) NULL DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `is_reserve` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
-
--- ----------------------------
--- Records of parkspace
--- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for payment
@@ -261,52 +243,6 @@ CREATE TABLE `payment`  (
 BEGIN;
 COMMIT;
 
--- ----------------------------
--- Table structure for reservation
--- ----------------------------
-DROP TABLE IF EXISTS `reservation`;
-CREATE TABLE `reservation`  (
-  `id` int(11) NOT NULL,
-  `type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_am_1-2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_am_3-4` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_am_5-6` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_am_7-8` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_am_9-10` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_am_11-12` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_pm_1-2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_pm_3-4` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_pm_5-6` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_pm_7-8` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T_pm_9-10` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `T-pm_11-12` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
-
--- ----------------------------
--- Records of reservation
--- ----------------------------
-BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for reserves
--- ----------------------------
-DROP TABLE IF EXISTS `reserves`;
-CREATE TABLE `reserves`  (
-  `id` int(11) NOT NULL,
-  `parking_space_id` int(11) NULL DEFAULT NULL,
-  `reserve_start` datetime NULL DEFAULT NULL,
-  `reserve_end` datetime NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
-
--- ----------------------------
--- Records of reserves
--- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for user
@@ -331,7 +267,6 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 BEGIN;
-<<<<<<< HEAD
 INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `A8`, `A9`, `A10`, `A11`, `A12`, `A13`, `A14`, `A15`, `A16`, `A17`, `A18`, `A19`, `A20`, `A21`, `A22`, `A23`, `A24`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `B8`, `B9`, `B10`, `B11`, `B12`, `B13`, `B14`, `B15`, `B16`, `B17`, `B18`, `B19`, `B20`, `B21`, `B22`, `B23`, `B24`) VALUES (1, 'Car', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY');
 INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `A8`, `A9`, `A10`, `A11`, `A12`, `A13`, `A14`, `A15`, `A16`, `A17`, `A18`, `A19`, `A20`, `A21`, `A22`, `A23`, `A24`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `B8`, `B9`, `B10`, `B11`, `B12`, `B13`, `B14`, `B15`, `B16`, `B17`, `B18`, `B19`, `B20`, `B21`, `B22`, `B23`, `B24`) VALUES (2, 'Car', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY');
 INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `A8`, `A9`, `A10`, `A11`, `A12`, `A13`, `A14`, `A15`, `A16`, `A17`, `A18`, `A19`, `A20`, `A21`, `A22`, `A23`, `A24`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `B8`, `B9`, `B10`, `B11`, `B12`, `B13`, `B14`, `B15`, `B16`, `B17`, `B18`, `B19`, `B20`, `B21`, `B22`, `B23`, `B24`) VALUES (3, 'Car', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'sss', 'EMPTY', 'sss', 'sss', 'sss', 'sss', 'sss', 'EMPTY', 'sss', 'sss', 'sss', 'EMPTY', 'sss', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'sss', 'EMPTY', 'sss', 'sss', 'sss', 'sss', 'sss', 'EMPTY', 'sss', 'sss', 'EMPTY', 'sss', 'sss', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY');
@@ -344,11 +279,7 @@ INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `
 INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `A8`, `A9`, `A10`, `A11`, `A12`, `A13`, `A14`, `A15`, `A16`, `A17`, `A18`, `A19`, `A20`, `A21`, `A22`, `A23`, `A24`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `B8`, `B9`, `B10`, `B11`, `B12`, `B13`, `B14`, `B15`, `B16`, `B17`, `B18`, `B19`, `B20`, `B21`, `B22`, `B23`, `B24`) VALUES (10, 'Bicycle', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY');
 INSERT INTO `appointment` (`id`, `name`, `date`, `license`, `parklot`) VALUES (1, 'stc', '2023/3/26 13:00-14:00', 'ABC', 1);
 INSERT INTO `appointment` (`id`, `name`, `date`, `license`, `parklot`) VALUES (2, 'stc', NULL, NULL, NULL);
-
-INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES (1, 'admin', 'admin', 1);
-=======
 INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `phone`, `address`, `Q1`, `A1`, `Q2`, `A2`) VALUES (1, 'admin', 'admin', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL), (2, 'admin1', 'admin1', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
->>>>>>> dbb57dcab2a2eab16bf0e0f82bdad1559d97c30f
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
