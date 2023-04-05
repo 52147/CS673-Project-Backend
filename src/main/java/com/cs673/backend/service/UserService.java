@@ -21,6 +21,8 @@ public interface UserService extends IService<User> {
 
     User register(UserDTO userDTO);
 
+    User findByEmail(String email);
+
     User changePassword(String username, String oldpassword, String newpassword);
 
     //UserDTO login(UserDTO userDTO);
