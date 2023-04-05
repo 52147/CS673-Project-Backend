@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/parklot")
 public class ParklotController {
     @Resource
