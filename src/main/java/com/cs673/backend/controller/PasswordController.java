@@ -14,16 +14,28 @@ public class PasswordController {
     private UserService userService;
 
     @RequestMapping("/forget")
-    @PutMapping("")
-    public ResponseEntity<?> changePassword(@RequestBody User loginUser) {
+    @PostMapping("")
+    public ResponseEntity<?> securityQuestion(@RequestParam("username") String logUser, String A1, String A2) {
+        User user = userService.findUserByUsername(logUser);
         try {
-            User user = userService.findUserByUsername(loginUser.getUsername());
 
-            //userService.changePassword(user.getUsername(), user.getPassword(), user.getNewPassword());
-            return ResponseEntity.ok(user);
+            if (user == null){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No user");
+            }
+            if((user.getA1().equals(A1)) && (user.getA2().equals(A2))){
+                //userService.changePassword(user.getUsername(), user.getPassword(), user.getNewPassword());
+                return ResponseEntity.ok(user);
+            }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
             }
+        return ResponseEntity.ok(user);
         }
+    @GetMapping("/forget/changePassword")
+    public void changePassword(@RequestParam("username") String logUser, String newPassword) {
+        User user = userService.findUserByUsername(logUser);
+        user.setPassword(newPassword);
+        userService.save(user);
+    }
 
 }
