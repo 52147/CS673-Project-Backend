@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 @Entity
-@Table
+@Table(name="member")
 public class MemberShip implements Serializable {
       @Id
       @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class MemberShip implements Serializable {
       private Date endTime;
 
       @Column
-      private String userID;
+      private String userId;
 
       public int getId() {
         return id;
@@ -66,8 +66,7 @@ public class MemberShip implements Serializable {
         this.plate = plate;
       }
 
-      public String getUserID(){return userID;}
+      public String getUserId(){ return userId; }
 
-      public void setUserID(String plate){ this.userID=userID; }
-
+      public void setUserId(String userId) { this.userId = userId; }
 }

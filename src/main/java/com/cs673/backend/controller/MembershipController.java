@@ -2,6 +2,7 @@ package com.cs673.backend.controller;
 
 
 import com.cs673.backend.entity.MemberShip;
+import com.cs673.backend.entity.ParkForAll;
 import com.cs673.backend.service.MembershipService;
 import com.cs673.backend.service.ParkInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,17 +32,22 @@ public class MembershipController {
     membershipService.save(memberShip);
   }
 
+  @RequestMapping( "/index/check/checkIn/checkMemberHistory")
+  public List<MemberShip> showMember(){
+    List<MemberShip> memberShips = membershipService.findAllMemberShip();
+    return memberShips;
+  }
 
   @PostMapping
   @RequestMapping("/check/index/check/checkIn/checkPermitByPlate")
-  public MemberShip checkPermitByPlate(String plate){
+  public MemberShip checkPermitByPlate(@RequestParam String plate){
     return membershipService.findMembershipByPlate(plate);
   }
 
   @PostMapping
-  @RequestMapping("/check/index/check/checkIn/checkPermitById")
-  public MemberShip checkPermitByUserId(String id){
-    return membershipService.findMemberShipByUserID(id);
+  @RequestMapping("/check/index/check/checkIn/checkPermitByUserId")
+  public MemberShip checkPermitByUserId(@RequestParam("p1") String userId){
+    return membershipService.findMemberShipByUserId(userId);
   }
 
   public int calTimeDiffInMonth(Date date1, Date date2){
