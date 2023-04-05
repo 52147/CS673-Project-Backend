@@ -15,4 +15,9 @@ public class GarageServiceImpl implements GarageService {
     public Garage findGarageData() {
         return garagerepo.findFirstByOrderByIdAsc();
     }
+
+    @Override
+    public void save(Garage garage) {
+        garagerepo.save(garage);
+    }
 }

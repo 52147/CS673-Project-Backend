@@ -35,6 +35,7 @@ public class UserServiceImp extends ServiceImpl<UserMapper, User>  implements Us
         if (one == null) {
             one = new User();
             BeanUtil.copyProperties(userDTO, one, true);
+            one.setRole(3);
             save(one);
         } else {
             throw new ServiceException("User already exists！");
@@ -44,8 +45,9 @@ public class UserServiceImp extends ServiceImpl<UserMapper, User>  implements Us
 
     private User getUserInfo(UserDTO userDTO) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", userDTO.getUsername());
-        queryWrapper.eq("password", userDTO.getPassword());
+        queryWrapper.and(wrapper -> wrapper.eq("username", userDTO.getUsername())
+                .or()
+                .eq("email", userDTO.getEmail()));
         User one;
         try {
             one = getOne(queryWrapper);

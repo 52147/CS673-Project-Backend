@@ -15,8 +15,10 @@ public class FormData {
     private Integer tag;
     private int payId;
     private int payAmount;
+    private String carType;
 
     public FormData(@JsonProperty("id") int id,
+                    @JsonProperty("carType") String carType,
                     @JsonProperty("parkNum") int parkNum,
                     @JsonProperty("plate") String plate,
                     @JsonProperty("cardNum") String cardNum,
@@ -26,6 +28,7 @@ public class FormData {
                     @JsonProperty("payId") int payId,
                     @JsonProperty("payAmount") int payAmount) {
         this.id = id;
+        this.carType = carType;
         this.parkNum = parkNum;
         this.plate = plate;
         this.cardNum = cardNum;
@@ -44,6 +47,8 @@ public class FormData {
         this.id = id;
     }
 
+    public String getCarType(){return this.carType;}
+    public void setCarType(String carType){this.carType=carType;}
     public int getParkNum() {
         return parkNum;
     }

@@ -9,6 +9,8 @@ public class ParkInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
+    private String carType;
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int parkNum;
@@ -26,6 +28,9 @@ public class ParkInfo implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getCarType(){return this.carType;}
+    public void setCarType(String carType){this.carType=carType;}
 
     public int getParkNum() {
         return parkNum;

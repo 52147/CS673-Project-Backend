@@ -13,7 +13,7 @@ public interface ParkForAllService {
 
     List<ParkForAll> findAllParkInForAll();
 
-    void save(ParkInfo parkinfo);
+    void save(ParkForAll parkinfo);
 
     //AllData findById(int id);
 
@@ -21,7 +21,13 @@ public interface ParkForAllService {
     Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id);
 
 
+    public ParkForAll findParkForAllByPlate(String plate);
+
     public ParkForAll findParkForAllByEntrance(Date entrance);
 
     public ParkForAll findParkForAllByExit(Date exit);
+
+    ParkForAll findParkForAllByEntranceAndExit(Date startDate, Date endDate);
+
+    List<ParkForAll> findParkForAllByEntranceAndExitBetween(Date startDate, Date endDate);
 }
