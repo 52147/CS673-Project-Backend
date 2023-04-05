@@ -38,14 +38,14 @@ public class MembershipController {
 
   @PostMapping
   @RequestMapping("/check/index/check/checkIn/checkPermitByPlate")
-  public MemberShip checkPermitByPlate(@RequestBody MemberShip memberShip){
-    return membershipService.findMembershipByPlate(memberShip.getPlate());
+  public List<MemberShip> checkPermitByPlate(@RequestBody MemberShip memberShip){
+    return membershipService.findAllMembershipByPlate(memberShip.getPlate());
   }
 
   @PostMapping
   @RequestMapping("/check/index/check/checkIn/checkPermitByUserId")
-  public MemberShip checkPermitByUserId(@RequestBody MemberShip memberShip){
-    return membershipService.findMemberShipByUserId(memberShip.getUserId());
+  public List<MemberShip> checkPermitByUserId(@RequestBody MemberShip memberShip){
+    return membershipService.findAllMembershipByUserId(memberShip.getUserId());
   }
 
   @PostMapping

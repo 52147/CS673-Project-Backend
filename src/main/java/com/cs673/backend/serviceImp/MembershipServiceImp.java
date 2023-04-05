@@ -23,9 +23,15 @@ public class MembershipServiceImp implements MembershipService{
   @Override
   public void save(MemberShip membership){ membershiprepo.save(membership);}
 
-
+  @Override
   public MemberShip findMembershipByPlate(String plate) {return membershiprepo.findMembershipByPlate(plate);}
-
+  @Override
   public MemberShip findMemberShipByUserId(String userId){return membershiprepo.findMemberShipByUserId(userId);}
+  @Override
+  public List<MemberShip> findAllMembershipByPlate(String plate){return  membershiprepo.findAllMembershipByPlate(plate);}
+
+  @Override
+  public List<MemberShip> findAllMembershipByUserId(String UserId){return  membershiprepo.findAllMembershipByUserId(UserId);}
+
 
 }

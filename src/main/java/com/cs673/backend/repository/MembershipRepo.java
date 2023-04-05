@@ -8,8 +8,11 @@ import java.util.List;
 
 public interface MembershipRepo extends JpaRepository<MemberShip, Integer> {
 
-    MemberShip findMembershipByPlate(@Param("plate") String plate);
+    MemberShip findMembershipByPlate(String plate);
 
     MemberShip findMemberShipByUserId(String userId);
+
+    List<MemberShip> findAllMembershipByPlate(String plate);
+    List<MemberShip> findAllMembershipByUserId(String userId);
 
 }
