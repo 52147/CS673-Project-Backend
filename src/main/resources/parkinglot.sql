@@ -218,7 +218,6 @@ INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `
 INSERT INTO `parklot` (`id`, `Type`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `A7`, `A8`, `A9`, `A10`, `A11`, `A12`, `A13`, `A14`, `A15`, `A16`, `A17`, `A18`, `A19`, `A20`, `A21`, `A22`, `A23`, `A24`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `B8`, `B9`, `B10`, `B11`, `B12`, `B13`, `B14`, `B15`, `B16`, `B17`, `B18`, `B19`, `B20`, `B21`, `B22`, `B23`, `B24`) VALUES (10, 'Bicycle', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY', 'EMPTY');
 INSERT INTO `appointment` (`id`, `name`, `date`, `license`, `parklot`) VALUES (1, 'stc', '2023/3/26 13:00-14:00', 'ABC', 1);
 INSERT INTO `appointment` (`id`, `name`, `date`, `license`, `parklot`) VALUES (2, 'stc', NULL, NULL, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `phone`, `address`, `Q1`, `A1`, `Q2`, `A2`) VALUES (1, 'admin', 'admin', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL), (2, 'admin1', 'admin1', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 
