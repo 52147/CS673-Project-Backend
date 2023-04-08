@@ -9,6 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface AppointmentMapper extends BaseMapper<Appointment> {
-    @Select("SELECT * FROM appointments WHERE date BETWEEN #{startDate} AND #{endDate} AND plate = #{plate}")
-    List<Appointment> getAppointmentsBetweenDatesAndPlate(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("plate") String plate);
+    @Select("SELECT * FROM appointment WHERE date BETWEEN #{startDate} AND #{endDate} AND license = #{plate}")
+    List<Appointment> getAppointmentBetweenDatesAndPlate(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("plate") String plate);
 }

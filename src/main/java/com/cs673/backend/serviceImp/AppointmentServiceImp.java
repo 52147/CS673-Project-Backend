@@ -22,7 +22,7 @@ public class AppointmentServiceImp extends ServiceImpl<AppointmentMapper, Appoin
         calendar.setTime(startDate);
         calendar.add(Calendar.HOUR_OF_DAY, 2);
         Date endDate = calendar.getTime();
-        List<Appointment> appointments = appointmentMapper.getAppointmentsBetweenDatesAndPlate(startDate, endDate, plate);
+        List<Appointment> appointments = appointmentMapper.getAppointmentBetweenDatesAndPlate(startDate, endDate, plate);
         if(appointments != null) {
             return true;
         }
