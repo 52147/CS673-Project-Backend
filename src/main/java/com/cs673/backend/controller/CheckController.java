@@ -1,12 +1,10 @@
 package com.cs673.backend.controller;
 
+import com.cs673.backend.entity.Garage;
 import com.cs673.backend.entity.MemberShip;
 import com.cs673.backend.entity.ParkForAll;
 import com.cs673.backend.entity.ParkInfo;
-import com.cs673.backend.service.FeeService;
-import com.cs673.backend.service.ParkForAllService;
-import com.cs673.backend.service.ParkInfoService;
-import com.cs673.backend.service.MembershipService;
+import com.cs673.backend.service.*;
 import com.cs673.backend.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,14 +31,22 @@ public class CheckController {
     @Autowired
     private FeeService feeService;
 
+    @Autowired
+    private GarageService garageService;
+
     
     @PostMapping
     @RequestMapping("/index/check/checkIn")
     public Msg checkIn(@RequestBody ParkInfo data) {
-        System.out.println(data);
+        Garage garage = garageService.findGarageData();
         if(checkEntrance(data.getPlate())) {
             return Msg.success().add("Entrance", "false");
         }
+        if(garage.getCurrent_spots() <= 0) {
+            return Msg.fail();
+        }
+        garage.setCurrent_spots(garage.getCurrent_spots() - 1);
+        garageService.save(garage);
         parkinfoservice.saveParkInfo(data);
         return Msg.success().add("Entrance", "true");
     }
@@ -52,23 +58,30 @@ public class CheckController {
         data.setEntrance(parkinfo.getEntrance());
         data.setCarType(parkinfo.getCarType());
         data.setParkNum(parkinfo.getParkNum());
-        System.out.println(data.getId());
         parkForAllService.save(data);
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
+
+        //Add 1 to current spot
+        Garage garage = garageService.findGarageData();
+        garage.setCurrent_spots(garage.getCurrent_spots()+1);
+        garageService.save(garage);
+
         return Msg.success();
     }
-
+    // 车牌没有membership怎么办？
     public boolean checkOverdue(ParkInfo data){
         MemberShip membership = membershipService.findMembershipByPlate(data.getPlate());
-        Date endTime = membership.getEndTime();
-        Date now = new Date();
-        int result = endTime.compareTo(now);
-        if (result <= 0){
-            return false;
+        if(membership!=null) {
+            Date endTime = membership.getEndTime();
+            Date now = new Date();
+            int result = endTime.compareTo(now);
+            if (result <= 0) {
+                return false;
+            } else {
+                return true;
+            }
         }
-        else{
-            return true;
-        }
+        return false;
     }
     @ResponseBody
     @GetMapping
@@ -79,7 +92,7 @@ public class CheckController {
         Date entrance = parkInfo.getEntrance();
         long parkingTime = calTimeDiffInMinutes(entrance, now);
         BigDecimal parkingFee;
-        if(checkOverdue(data)){
+        if(false && checkOverdue(data)){
             parkingFee= BigDecimal.valueOf(0);
         }
         else {
@@ -102,7 +115,6 @@ public class CheckController {
         return Msg.success().add("parkforall", parkForAll);
     }
 
-    //@RequestParam("name") String name),
     //用出库时间检查已经出去的车辆。使用数据库parkforall。
     @GetMapping
     @RequestMapping("/index/check/checkIn/checkHistory/FindbyDate_Exit")
@@ -113,8 +125,6 @@ public class CheckController {
         System.out.println(startdate);
         List<ParkForAll> parkForAll = parkForAllService.findParkForAllByEntranceAndExitBetween(startdate, enddate);
         System.out.println(parkForAll);
-//        Date exit = parkForAll.getExit();
-//        Date entrance = parkForAll.getEntrance();
         return parkForAll;
     }
 

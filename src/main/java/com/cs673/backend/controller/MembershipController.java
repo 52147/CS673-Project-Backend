@@ -1,8 +1,9 @@
 package com.cs673.backend.controller;
 
 
+import com.cs673.backend.entity.MemberFeeStandard;
 import com.cs673.backend.entity.MemberShip;
-import com.cs673.backend.entity.ParkForAll;
+import com.cs673.backend.service.MemberFeeService;
 import com.cs673.backend.service.MembershipService;
 import com.cs673.backend.service.ParkInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,10 @@ public class MembershipController {
   @Autowired
   private MembershipService membershipService;
 
+  @Autowired
+  private MemberFeeService memberFeeService;
+
   private ParkInfoService parkInfoService;
-  @PostMapping
-  @RequestMapping("/check/index/check/checkIn/purchasePermit")
-  public int purchasePermit(@RequestBody MemberShip memberShip){
-    int month = calTimeDiffInMonth(memberShip.getStartTime(),memberShip.getEndTime());
-    return calMemberFee(month);
-  }
 
   @RequestMapping("/check/index/check/checkIn/purchasePermit/Successful")
   public void purchasePermitSuccessful(@RequestBody MemberShip memberShip){
@@ -40,15 +38,37 @@ public class MembershipController {
 
   @PostMapping
   @RequestMapping("/check/index/check/checkIn/checkPermitByPlate")
-  public MemberShip checkPermitByPlate(@RequestParam String plate){
-    return membershipService.findMembershipByPlate(plate);
+  public List<MemberShip> checkPermitByPlate(@RequestBody MemberShip memberShip){
+    return membershipService.findAllMembershipByPlate(memberShip.getPlate());
   }
 
   @PostMapping
   @RequestMapping("/check/index/check/checkIn/checkPermitByUserId")
-  public MemberShip checkPermitByUserId(@RequestParam("p1") String userId){
-    return membershipService.findMemberShipByUserId(userId);
+  public List<MemberShip> checkPermitByUserId(@RequestBody MemberShip memberShip){
+    return membershipService.findAllMembershipByUserId(memberShip.getUserId());
   }
+
+  @PostMapping
+  @RequestMapping("/check/index/check/checkIn/changeMemberPrice")
+  public void changeMemberPrice(@RequestBody MemberFeeStandard memberFeeStandard){
+    MemberFeeStandard tmpStandard = memberFeeService.findMemberFeeStandardById(1);
+    if(memberFeeStandard.getMonthlyPay()!=tmpStandard.getMonthlyPay()){
+      tmpStandard.setMonthlyPay(memberFeeStandard.getMonthlyPay());
+    }
+    if(memberFeeStandard.getYearlyPay()!=tmpStandard.getYearlyPay()){
+      tmpStandard.setYearlyPay(memberFeeStandard.getYearlyPay());
+    }
+    memberFeeService.save(tmpStandard);
+  }
+
+  @PostMapping
+  @RequestMapping("/check/index/check/checkIn/showMemberPrice")
+  public MemberFeeStandard showMemberPrice(){
+    return memberFeeService.findMemberFeeStandardById(1);
+  }
+
+
+
 
   public int calTimeDiffInMonth(Date date1, Date date2){
     Calendar cal1 = Calendar.getInstance();
@@ -63,18 +83,4 @@ public class MembershipController {
     return months;
   }
 
-  public int calMemberFee(int month){
-    if(month<6){
-      return 200*month;
-    }
-    else if(month>=6 && month<12){
-      return 180*month;
-    }
-    else if(month==12){
-      return 1500;
-    }
-    else{
-      return 100*month;
-    }
-  }
 }
