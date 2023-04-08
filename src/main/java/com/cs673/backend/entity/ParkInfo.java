@@ -20,6 +20,26 @@ public class ParkInfo implements Serializable {
     private String plate;
     @Column(nullable = false)
     private Date entrance;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean membership = false;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean reservation = false;
+
+    public Boolean getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Boolean membership) {
+        this.membership = membership;
+    }
+
+    public Boolean getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Boolean reservation) {
+        this.reservation = reservation;
+    }
 
     public int getId() {
         return id;

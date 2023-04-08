@@ -130,6 +130,8 @@ CREATE TABLE `parkinfo`  (
   `plate` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `entrance` datetime NULL DEFAULT NULL,
   `car_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `membership` BIT(1),
+  `reservation` BIT(1),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `plate`(`plate`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci;

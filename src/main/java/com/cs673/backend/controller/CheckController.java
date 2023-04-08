@@ -25,14 +25,14 @@ public class CheckController {
     private ParkInfoService parkinfoservice;
     @Autowired
     private ParkForAllService parkForAllService;
-
     @Autowired
     private MembershipService membershipService;
     @Autowired
     private FeeService feeService;
-
     @Autowired
     private GarageService garageService;
+    @Autowired
+    private AppointmentService appointmentService;
 
     
     @PostMapping
@@ -45,8 +45,15 @@ public class CheckController {
         if(garage.getCurrent_spots() <= 0) {
             return Msg.fail();
         }
+        if(checkOverdue(data)) {
+            data.setMembership(true);
+        }
+        if(checkReservation(data)) {
+            data.setReservation(true);
+        }
         garage.setCurrent_spots(garage.getCurrent_spots() - 1);
         garageService.save(garage);
+
         parkinfoservice.saveParkInfo(data);
         return Msg.success().add("Entrance", "true");
     }
@@ -60,7 +67,6 @@ public class CheckController {
         data.setParkNum(parkinfo.getParkNum());
         parkForAllService.save(data);
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
-
         //Add 1 to current spot
         Garage garage = garageService.findGarageData();
         garage.setCurrent_spots(garage.getCurrent_spots()+1);
@@ -68,7 +74,7 @@ public class CheckController {
 
         return Msg.success();
     }
-    // 车牌没有membership怎么办？
+    //Check if plate is membership
     public boolean checkOverdue(ParkInfo data){
         MemberShip membership = membershipService.findMembershipByPlate(data.getPlate());
         if(membership!=null) {
@@ -83,6 +89,10 @@ public class CheckController {
         }
         return false;
     }
+
+    public boolean checkReservation(ParkInfo data) {
+        return appointmentService.checkReservation(new Date(), data.getPlate());
+    }
     @ResponseBody
     @GetMapping
     @RequestMapping("/index/check/checkPlate")
@@ -92,7 +102,8 @@ public class CheckController {
         Date entrance = parkInfo.getEntrance();
         long parkingTime = calTimeDiffInMinutes(entrance, now);
         BigDecimal parkingFee;
-        if(false && checkOverdue(data)){
+        //If it is reserved or membership, we don't charge
+        if(data.getMembership() || data.getReservation()){
             parkingFee= BigDecimal.valueOf(0);
         }
         else {
