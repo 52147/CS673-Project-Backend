@@ -29,15 +29,6 @@ public class UserServiceImp extends ServiceImpl<UserMapper, User>  implements Us
         return userRepository.findByUsernameAndPassword(username, password);
     }
     @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-    @Override
-    public User changePassword(String username, String oldpassword, String newpassword) {
-        return userRepository.changePassword(username, oldpassword, newpassword);
-    }
-
-    @Override
     public User register(UserDTO userDTO) {
         User one = getUserInfo(userDTO);
         if (one == null) {

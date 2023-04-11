@@ -16,11 +16,4 @@ public class UserDTO {
     private String Q2;
     private String A2;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.password = email;
-    }
 }

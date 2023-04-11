@@ -1,6 +1,7 @@
 package com.cs673.backend.controller;
 import com.cs673.backend.entity.User;
 import com.cs673.backend.service.UserService;
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,21 +16,6 @@ public class PasswordController {
 
     @RequestMapping("/forget")
     @PostMapping("")
-    public ResponseEntity<?> getUsername(@RequestBody User logUser) {
-        User user = userService.findUserByUsername(logUser.getUsername());
-        try {
-
-            if (user == null){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No user");
-            }
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-            }
-        return ResponseEntity.ok(user);
-        }
-    @RequestMapping("/forget/securityQuestion")
-    @PostMapping("")
     public ResponseEntity<?> securityQuestion(@RequestBody User logUser) {
         User user = userService.findUserByUsername(logUser.getUsername());
         try {
@@ -43,11 +29,20 @@ public class PasswordController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/forget/changePassword")
-    public void changePassword(@RequestBody User logUser, String newPassword) {
+    @PostMapping("/forget/changePassword")
+    public void changePassword(@RequestBody User logUser, @RequestParam(required = true) String newPassword) {
+        System.out.println("newpass = " + newPassword);
+        if (newPassword == null || newPassword.isEmpty()) {
+            throw new IllegalArgumentException("New password cannot be empty.");
+        }
         User user = userService.findUserByUsername(logUser.getUsername());
-        user.setPassword(newPassword);
-        userService.save(user);
+        try {
+            user.setPassword(newPassword);
+            userService.saveOrUpdate(user);
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while changing the password. Please try again later.");
+        }
+
     }
 
 }
