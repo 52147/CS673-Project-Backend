@@ -30,11 +30,20 @@ public class PasswordController {
             }
         return ResponseEntity.ok(user);
         }
-    @GetMapping("/forget/changePassword")
-    public void changePassword(@RequestBody User logUser, String newPassword) {
+    @PostMapping("/forget/changePassword")
+    public void changePassword(@RequestBody User logUser, @RequestParam(required = true) String newPassword) {
+        System.out.println("newpass = " + newPassword);
+        if (newPassword == null || newPassword.isEmpty()) {
+            throw new IllegalArgumentException("New password cannot be empty.");
+        }
         User user = userService.findUserByUsername(logUser.getUsername());
-        user.setPassword(newPassword);
-        userService.save(user);
+        try {
+            user.setPassword(newPassword);
+            userService.saveOrUpdate(user);
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while changing the password. Please try again later.");
+        }
+
     }
 
 }
