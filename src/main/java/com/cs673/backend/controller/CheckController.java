@@ -8,10 +8,8 @@ import com.cs673.backend.service.*;
 import com.cs673.backend.utils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalTime;
@@ -35,8 +33,9 @@ public class CheckController {
     private GarageService garageService;
     @Autowired
     private AppointmentService appointmentService;
+    private String bicyclePlate;
 
-    
+
     @PostMapping
     @RequestMapping("/index/check/checkIn")
     public Msg checkIn(@RequestBody ParkInfo data) {
@@ -55,12 +54,19 @@ public class CheckController {
         }
         garage.setCurrent_spots(garage.getCurrent_spots() - 1);
         garageService.save(garage);
-        
+
         if(data.getCarType()=="Bicycle"){
             data.setPlate(getBicyclePlate());
+            bicyclePlate = data.getPlate();
         }
+
         parkinfoservice.saveParkInfo(data);
         return Msg.success().add("Entrance", "true");
+    }
+
+    @PostMapping("/index/check/getBicyclePlate")
+    public String returnBicycle(){
+        return bicyclePlate;
     }
 
     /*
@@ -89,6 +95,7 @@ public class CheckController {
         garageService.save(garage);
         return Msg.success();
     }
+
     //Check if plate is membership
     public boolean checkOverdue(ParkInfo data){
         MemberShip membership = membershipService.findMembershipByPlate(data.getPlate());
@@ -108,6 +115,7 @@ public class CheckController {
     public boolean checkReservation(ParkInfo data) {
         return appointmentService.checkReservation(new Date(), data.getPlate());
     }
+
     @ResponseBody
     @GetMapping
     @RequestMapping("/index/check/checkPlate")
@@ -180,7 +188,6 @@ public class CheckController {
         return false;
     }
 
-
     public long calTimeDiffInMinutes(Date entrance, Date exit) {
         long timeDiffMillis = exit.getTime() - entrance.getTime();
 
@@ -197,7 +204,5 @@ public class CheckController {
         long minute = minutes % 60;
         return hours + " hours and " + minute + " minutes";
     }
-
-
 
 }
