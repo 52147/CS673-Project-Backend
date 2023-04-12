@@ -133,9 +133,9 @@ public class CheckController {
     @ResponseBody
     @GetMapping
     @RequestMapping("/index/check/checkIn/checkHistory/checkPlate")
-    public Msg CheckAllPlate(@RequestBody ParkForAll data){
-        ParkForAll parkForAll = parkForAllService.findParkForAllByPlate(data.getPlate());
-        return Msg.success().add("parkforall", parkForAll);
+    public List<ParkForAll> CheckAllPlate(@RequestBody ParkForAll data){
+        List<ParkForAll> parkForAll = parkForAllService.findAllParkForAllByPlate(data.getPlate());
+        return parkForAll;
     }
 
     //用出库时间检查已经出去的车辆。使用数据库parkforall。

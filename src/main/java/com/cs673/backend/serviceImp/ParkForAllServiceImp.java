@@ -35,6 +35,9 @@ public class ParkForAllServiceImp implements  ParkForAllService{
     public List<ParkForAll> findAllParkInForAll(){return parkForAllRepo.findAll();}
 
     @Override
+    public List<ParkForAll> findAllParkForAllByPlate(String plate){return parkForAllRepo.findAllParkForAllByPlate(plate);}
+
+    @Override
     public Page<ParkForAll> findAllByOrderByIdDesc(PageRequest id){return parkForAllRepo.findAllByOrderByIdDesc(id);}
 
     @Override

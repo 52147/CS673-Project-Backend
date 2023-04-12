@@ -30,4 +30,6 @@ public interface ParkForAllRepo extends JpaRepository<ParkForAll, Integer> {
     ParkForAll findParkForAllByEntranceBetween(Date startDate, Date endDate);
 
     List<ParkForAll> findParkForAllByEntranceBetweenOrExitBetween(Date startDate, Date endDate, Date startDate1, Date endDate1);
+
+    List<ParkForAll> findAllParkForAllByPlate(String plate);
 }

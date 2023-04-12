@@ -23,6 +23,8 @@ public interface ParkForAllService {
 
     public ParkForAll findParkForAllByPlate(String plate);
 
+    public List<ParkForAll> findAllParkForAllByPlate(String plate);
+
     public ParkForAll findParkForAllByEntrance(Date entrance);
 
     public ParkForAll findParkForAllByExit(Date exit);
