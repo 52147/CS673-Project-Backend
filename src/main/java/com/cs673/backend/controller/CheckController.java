@@ -14,12 +14,14 @@ import java.text.SimpleDateFormat;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class CheckController {
     @Autowired
     private ParkInfoService parkinfoservice;
@@ -58,12 +60,23 @@ public class CheckController {
         return Msg.success().add("Entrance", "true");
     }
 
+    /*
+    根据当前时间生成临时车牌
+    仅用于后端内部调用！
+     */
+    //@RequestMapping("/index/check/getBicyclePlate")
+    public String getBicyclePlate(){
+        LocalTime time = LocalTime.now(); // get the current time
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
+        return time.format(formatter)+"Bicycle";
+    }
+
     @RequestMapping("/index/check/checkOut")
     public Msg checkOut(@RequestBody ParkForAll data) {
         ParkInfo parkinfo = parkinfoservice.findFirstByPlateOrderByEntrance(data.getPlate());
+        data.setCarType(parkinfo.getCarType());
         data.setCardNum(parkinfo.getCardNum());
         data.setEntrance(parkinfo.getEntrance());
-        data.setCarType(parkinfo.getCarType());
         data.setParkNum(parkinfo.getParkNum());
         parkForAllService.save(data);
         parkinfoservice.deleteParkInfoByPlate(data.getPlate());
@@ -71,7 +84,6 @@ public class CheckController {
         Garage garage = garageService.findGarageData();
         garage.setCurrent_spots(garage.getCurrent_spots()+1);
         garageService.save(garage);
-
         return Msg.success();
     }
     //Check if plate is membership

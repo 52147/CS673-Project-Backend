@@ -20,7 +20,7 @@ public class Appointment {
     private Integer id;
     private Integer parklot;
     private String date;
-    private String license;
+    private String license      ;
     private String name;
 
 }
