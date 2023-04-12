@@ -1,6 +1,0 @@
-<repositories>
-    <repository>
-        <id>opencv</id>
-        <url>https://repo.spring.io/libs-release-local/</url>
-    </repository>
-</repositories>
