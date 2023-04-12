@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CheckController {
     @Autowired
     private ParkInfoService parkinfoservice;
@@ -55,7 +55,10 @@ public class CheckController {
         }
         garage.setCurrent_spots(garage.getCurrent_spots() - 1);
         garageService.save(garage);
-
+        
+        if(data.getCarType()=="Bicycle"){
+            data.setPlate(getBicyclePlate());
+        }
         parkinfoservice.saveParkInfo(data);
         return Msg.success().add("Entrance", "true");
     }
@@ -162,8 +165,6 @@ public class CheckController {
         BigDecimal parkingFee = calParkingFee(parkingTime);
         return Msg.success().add("parkForAll", parkForAll).add("parkingFee", parkingFee).add("exit", exit).add("parkingtime", parkingtimeToString(parkingTime));
     }
-
-
 
     @GetMapping
     @RequestMapping("/index/check/checkNum")
