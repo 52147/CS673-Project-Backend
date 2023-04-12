@@ -16,7 +16,7 @@ public class ParkInfo implements Serializable {
     private int parkNum;
     @Column(nullable = true)
     private String cardNum;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String plate;
     @Column(nullable = false)
     private Date entrance;

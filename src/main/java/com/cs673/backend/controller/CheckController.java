@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class CheckController {
     @Autowired
     private ParkInfoService parkinfoservice;
@@ -39,6 +39,11 @@ public class CheckController {
     @PostMapping
     @RequestMapping("/index/check/checkIn")
     public Msg checkIn(@RequestBody ParkInfo data) {
+        System.out.println(data.getCarType());
+        if(data.getCarType().equals("bicycle")){
+            data.setPlate(getBicyclePlate());
+            bicyclePlate = data.getPlate();
+        }
         Garage garage = garageService.findGarageData();
         if(checkEntrance(data.getPlate())) {
             return Msg.success().add("Entrance", "false");
@@ -54,12 +59,6 @@ public class CheckController {
         }
         garage.setCurrent_spots(garage.getCurrent_spots() - 1);
         garageService.save(garage);
-
-        if(data.getCarType()=="Bicycle"){
-            data.setPlate(getBicyclePlate());
-            bicyclePlate = data.getPlate();
-        }
-
         parkinfoservice.saveParkInfo(data);
         return Msg.success().add("Entrance", "true");
     }
