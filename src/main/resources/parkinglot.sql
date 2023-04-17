@@ -249,3 +249,16 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `phone`, `add
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+-- Table structure for memberfee
+-- ----------------------------
+DROP TABLE IF EXISTS `memberfee`;
+CREATE TABLE `memberfee` (
+                             `id` int(11) NOT NULL AUTO_INCREMENT,
+                             `monthly_pay` int(11) DEFAULT NULL,
+                             `yearly_pay` int(11) DEFAULT NULL,
+                             PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS = 1;
