@@ -63,7 +63,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `garage`;
 CREATE TABLE `garage`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `total_spots` int(11) NULL DEFAULT NULL,
   `current_spots` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -81,7 +81,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `permit_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `start_time` datetime NULL DEFAULT NULL,
