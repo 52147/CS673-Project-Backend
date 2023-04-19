@@ -2,6 +2,7 @@ package com.cs673.backend.controller;
 
 import com.cs673.backend.entity.Garage;
 import com.cs673.backend.service.CameraService;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -35,6 +36,7 @@ public class CameraController {
         new Thread(() -> {
             while (true) {
                 try {
+                    cameraService.init();
                     Mat frame = cameraService.captureFrame();
                     byte[] imageData = toImageData(frame);
                     emitter.send(SseEmitter.event().data(imageData));
@@ -45,6 +47,14 @@ public class CameraController {
         }).start();
 
         return emitter;
+    }
+
+    @GetMapping("/camera-test")
+    public void CameraTest() {
+        cameraService.init();
+        Mat frame = cameraService.captureFrame();
+        Imgcodecs.imwrite("camera.jpg", frame);
+        System.out.println("Frame captured!");
     }
 
     private byte[] toImageData(Mat frame) {
