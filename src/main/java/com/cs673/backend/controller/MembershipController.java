@@ -27,7 +27,22 @@ public class MembershipController {
 
   @RequestMapping("/check/index/check/checkIn/purchasePermit/Successful")
   public void purchasePermitSuccessful(@RequestBody MemberShip memberShip){
-    membershipService.save(memberShip);
+    Calendar calendar = Calendar.getInstance(); // Get current time
+    Date date = calendar.getTime();
+    memberShip.setStartTime(date);
+    if(memberShip.getPermitType().toLowerCase().equals("year")){
+      memberShip.setEndTime(yearPermit(calendar));
+      membershipService.save(memberShip);
+    } else if (memberShip.getPermitType().toLowerCase().equals("month")) {
+      memberShip.setEndTime(monthPermit(calendar));
+      membershipService.save(memberShip);
+    } else if (memberShip.getPermitType().toLowerCase().equals("day")) {
+      memberShip.setEndTime(dayPermit(calendar));
+      membershipService.save(memberShip);
+    }
+    else {
+      membershipService.save(memberShip);
+    }
   }
 
   @RequestMapping( "/index/check/checkIn/checkMemberHistory")
@@ -67,7 +82,23 @@ public class MembershipController {
     return memberFeeService.findMemberFeeStandardById(1);
   }
 
+  private Date yearPermit(Calendar calendar){
+    calendar.add(Calendar.YEAR, 1); // Add one year
+    Date date = calendar.getTime(); // Get updated time
+    return date;
+  }
 
+  private Date monthPermit(Calendar calendar){
+    calendar.add(Calendar.MONTH, 1); // Add one month
+    Date date = calendar.getTime(); // Get updated time
+    return date;
+  }
+
+  private  Date dayPermit(Calendar calendar){
+    calendar.add(Calendar.DAY_OF_MONTH, 1); // Add one day
+    Date date = calendar.getTime(); // Get updated time
+    return date;
+  }
 
 
   public int calTimeDiffInMonth(Date date1, Date date2){
