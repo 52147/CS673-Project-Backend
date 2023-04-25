@@ -19,6 +19,7 @@ public class User implements Serializable {
 
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(type = IdType.AUTO)
     private Integer id;
     @Column(unique = true)

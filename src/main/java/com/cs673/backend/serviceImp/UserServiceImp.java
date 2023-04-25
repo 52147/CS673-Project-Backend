@@ -13,6 +13,8 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImp extends ServiceImpl<UserMapper, User>  implements UserService {
     private static final Log LOG = Log.get();
@@ -41,6 +43,13 @@ public class UserServiceImp extends ServiceImpl<UserMapper, User>  implements Us
             throw new ServiceException("User already exists！");
         }
         return one;
+    }
+
+    @Override
+    public List<User> getUserByName(String username) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        return list(queryWrapper);
     }
 
     private User getUserInfo(UserDTO userDTO) {

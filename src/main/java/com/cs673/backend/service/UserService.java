@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.cs673.backend.DTO.UserDTO;
 import com.cs673.backend.entity.User;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -20,6 +22,8 @@ public interface UserService extends IService<User> {
     User findByUsernameAndPassword(String username, String password);
 
     User register(UserDTO userDTO);
+
+    List<User> getUserByName(String testuser);
 
     //UserDTO login(UserDTO userDTO);
 
