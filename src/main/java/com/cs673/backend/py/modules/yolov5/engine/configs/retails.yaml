@@ -1,0 +1,44 @@
+# YOLOv5 🚀 by Ultralytics https://ultralytics.com, licensed under GNU GPL v3.0
+# COCO128 dataset https://www.kaggle.com/ultralytics/coco128 (first 128 images from COCO train2017)
+# Example usage: python train.py --data coco128.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── coco128  ← downloads here
+
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+#path: /home/dm/data3/dataset/face_person/MPII  # dataset root dir
+#train: /home/dm/data3/dataset/face_person/MPII/test1.txt  # train images (relative to 'path') 128 images
+#val: /home/dm/data3/dataset/face_person/MPII/test1.txt  # val images (relative to 'path') 128 images
+path: ""  # dataset root dir
+#train:
+#- "/data3/panjinquan/dataset/face_person/MPII/trainval.txt"
+#- "/data3/panjinquan/dataset/face_person/VOCdevkit/VOC2012/trainval.txt"
+#- "/data3/panjinquan/dataset/face_person/VOCdevkit/VOC2007/trainval.txt"
+#- "/data3/panjinquan/dataset/face_person/COCO/VOC/trainval.txt"
+#- "/data3/panjinquan/dataset/face_person/SMTC/trainval.txt"
+#val: "/data3/panjinquan/dataset/face_person/MPII/test.txt"
+
+# ATP: /atpcephdata/panjinquan/dataset/face_person
+
+train:
+#  - "/home/dm/nasdata/dataset/new_retails/VOC/202107_123/train.txt"
+  - "/data1/panjinquan/dataset/new_retails/VOC/collect_ip_360/train.txt"
+  - "/data1/panjinquan/dataset/new_retails/VOC/202107_123/train.txt"
+val:
+#  - "/home/dm/nasdata/dataset/new_retails/VOC/202107_val/val.txt"
+  - "/data1/panjinquan/dataset/new_retails/VOC/collect_ip_360_val/val.txt"
+#  - "/data1/panjinquan/dataset/new_retails/VOC/202107_val/val.txt"
+
+
+test:  # test images (optional)
+data_type: voc
+
+# Classes
+nc: 1  # number of classes
+names: [ "unique" ]
+
+
+# Download script/URL (optional)
+#download: https://github.com/ultralytics/yolov5/releases/download/v1.0/coco128.zip

@@ -2,16 +2,21 @@ package com.cs673.backend.controller;
 
 import com.cs673.backend.entity.Garage;
 import com.cs673.backend.service.CameraService;
+import com.cs673.backend.serviceImp.YOLOService;
+import jep.JepException;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.pytorch.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -22,9 +27,12 @@ public class CameraController {
     private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
     private final CameraService cameraService;
 
+    private final YOLOService yoloService;
+
     @Autowired
-    public CameraController(CameraService cameraService) {
+    public CameraController(CameraService cameraService, YOLOService yoloService) {
         this.cameraService = cameraService;
+        this.yoloService = yoloService;
     }
 
     @GetMapping("/camera-stream")
@@ -49,9 +57,9 @@ public class CameraController {
         return emitter;
     }
 
+
     @GetMapping("/camera-test")
-    public void CameraTest() {
-        cameraService.init();
+    public void CameraTest() throws JepException {
         Mat frame = cameraService.captureFrame();
         Imgcodecs.imwrite("camera.jpg", frame);
         System.out.println("Frame captured!");

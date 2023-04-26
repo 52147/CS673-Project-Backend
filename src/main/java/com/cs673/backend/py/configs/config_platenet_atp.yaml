@@ -1,0 +1,38 @@
+train_data:
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2020-voc/train/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2020-voc/val/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_base/plates-train'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_blur/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_challenge/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_db/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_fn/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_rotate/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_tilt/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_weather/plates'
+
+test_data:
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2020-voc/test/plates'
+  - 'cv/panjinquan/dataset/csdn/plate/dataset/CCPD2019-voc/ccpd_base/plates-test'
+class_name: "data/plates_table.txt"
+train_transform: "train"
+test_transform: "test"
+batch_size: 128
+net_type: 'PlateNet'
+flag: "Perspective"
+input_size: [ 168,48 ]
+rgb_mean: [ 0.5, 0.5, 0.5 ]
+rgb_std: [ 0.5, 0.5, 0.5 ]
+resample: True
+work_dir: "work_space"
+optim_type: 'SGD'
+lr: 0.1
+num_epochs: 200
+milestones: [ 70,110,150,180]
+#weight_decay: 0.0
+weight_decay: 0.0005           # weight_decay，默认5e-4
+momentum: 0.9
+gpu_id: [ 0 ]
+num_workers: 8
+log_freq: 10
+pretrained: ""
+#pretrained: "data/pretrained/PlateNet/PlateNet.pth"
