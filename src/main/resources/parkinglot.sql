@@ -23,12 +23,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `appointment`;
 CREATE TABLE `appointment`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `date` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `license` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `license` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `parklot` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of appointment
@@ -43,13 +43,13 @@ DROP TABLE IF EXISTS `billtable`;
 CREATE TABLE `billtable`  (
   `id` int(11) NOT NULL,
   `hour` int(11) NULL DEFAULT NULL,
-  `car_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
+  `car_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
   `first_price` int(255) NULL DEFAULT NULL,
   `second_price` int(11) NULL DEFAULT NULL,
   `max_price` int(11) NULL DEFAULT NULL,
-  `comment` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of billtable
@@ -67,7 +67,7 @@ CREATE TABLE `garage`  (
   `total_spots` int(11) NULL DEFAULT NULL,
   `current_spots` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of garage
@@ -82,13 +82,13 @@ COMMIT;
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `permit_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `plate` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `permit_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `start_time` datetime NULL DEFAULT NULL,
   `end_time` datetime NULL DEFAULT NULL,
-  `user_id` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of member
@@ -102,16 +102,16 @@ COMMIT;
 DROP TABLE IF EXISTS `parkforall`;
 CREATE TABLE `parkforall`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `card_num` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `card_num` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `park_num` int(11) NULL DEFAULT NULL,
-  `plate` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `plate` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `entrance` datetime NULL DEFAULT NULL,
   `exit_time` datetime NULL DEFAULT NULL,
   `parking_fee` int(11) NULL DEFAULT NULL,
-  `total_parking_time` mediumtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
-  `car_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `total_parking_time` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `car_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of parkforall
@@ -127,15 +127,15 @@ DROP TABLE IF EXISTS `parkinfo`;
 CREATE TABLE `parkinfo`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `park_num` int(11) NULL DEFAULT NULL,
-  `card_num` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `plate` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `card_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `plate` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `entrance` datetime NULL DEFAULT NULL,
-  `car_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `car_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `membership` BIT(1),
   `reservation` BIT(1),
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `plate`(`plate`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of parkinfo
@@ -150,57 +150,57 @@ COMMIT;
 DROP TABLE IF EXISTS `parklot`;
 CREATE TABLE `parklot`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `A1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A6` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A7` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A8` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A9` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A10` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A11` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A12` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A13` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A14` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A15` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A16` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A17` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A18` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A19` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A20` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A21` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A22` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A23` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `A24` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B6` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B7` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B8` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B9` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B10` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B11` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B12` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B13` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B14` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B15` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B16` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B17` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B18` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B19` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B20` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B21` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B22` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B23` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
-  `B24` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'EMPTY',
+  `Type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `A1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A4` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A5` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A6` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A7` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A8` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A9` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A10` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A11` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A12` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A13` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A14` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A15` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A16` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A17` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A18` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A19` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A20` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A21` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A22` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A23` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `A24` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B4` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B5` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B6` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B7` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B8` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B9` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B10` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B11` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B12` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B13` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B14` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B15` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B16` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B17` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B18` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B19` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B20` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B21` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B22` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B23` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
+  `B24` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'EMPTY',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 810 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 810 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of parklot
@@ -228,18 +228,18 @@ COMMIT;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `role` int(11) NULL DEFAULT 3 COMMENT '1: super admin, 2: admin, 3: user',
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Q1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `A1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Q2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `A2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Q1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `A1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Q2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `A2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of user
@@ -259,6 +259,6 @@ CREATE TABLE `memberfee` (
                              `monthly_pay` int(11) DEFAULT NULL,
                              `yearly_pay` int(11) DEFAULT NULL,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 SET FOREIGN_KEY_CHECKS = 1;

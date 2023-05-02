@@ -57,20 +57,19 @@ public class CameraServiceImp implements CameraService {
         try {
             long delay = 1;
             captureFrame();
-            String plate = "gggg";//yoloService.detectObjects("src/main/java/com/cs673/backend/image");
-            System.out.println(plate);
-            ParkInfo parkInfo = new ParkInfo();
-            parkInfo.setPlate(plate);
-            checkController.checkIn(parkInfo);
+            String plate = yoloService.detectObjects("src/main/java/com/cs673/backend/image");
             if(plate.length() > 2) {
                 delay = 8;
+                ParkInfo parkInfo = new ParkInfo();
+                parkInfo.setPlate(plate);
+                checkController.checkIn(parkInfo);
             }
             scheduleCaptureImage(delay);
-        /*
+
         } catch (JepException e) {
             System.err.println("Error in captureImage: " + e.getMessage());
 
-         */
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
