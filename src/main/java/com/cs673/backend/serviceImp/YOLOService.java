@@ -17,13 +17,12 @@ public class YOLOService {
     private ThreadLocal<Jep> jep;
 
     public YOLOService() throws JepException {
-
         jep = new ThreadLocal<Jep>() {
             @Override
             protected Jep initialValue() {
                 try {
                     JepConfig config = new JepConfig();
-                    config.addIncludePaths("C:\\Users\\15221\\anaconda3\\envs\\ml\\lib\\site-packages");
+                    config.addIncludePaths("/Users/mapotofu/anaconda3/envs/ml/lib/python3.8/site-packages/");
                     Jep jepInstance = new Jep(config);
                     jepInstance.eval("import sys");
                     jepInstance.eval("sys.path.insert(0, 'src/main/java/com/cs673/backend/py')");

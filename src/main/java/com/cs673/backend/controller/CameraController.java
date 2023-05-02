@@ -60,8 +60,8 @@ public class CameraController {
 
     @GetMapping("/camera-test")
     public void CameraTest() throws JepException {
-        Mat frame = cameraService.captureFrame();
-        Imgcodecs.imwrite("camera.jpg", frame);
+        String plate = yoloService.detectObjects("src/main/java/com/cs673/backend/image");
+        System.out.println("plate is" + plate);
         System.out.println("Frame captured!");
     }
 

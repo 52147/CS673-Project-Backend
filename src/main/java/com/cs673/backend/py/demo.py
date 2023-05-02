@@ -85,7 +85,7 @@ class Recognizer(object):
                            input_size=self.input_size, is_train=False)  # export  True 用来推理
         # model =build_lprnet(num_classes=len(plate_chr),export=True)
         model.load_state_dict(model_state)
-        model.to(self.device)
+        #model.to(self.device)
         model.eval()
         return model
 
@@ -126,7 +126,7 @@ class Recognizer(object):
             if len(image) == 0: return result
         with torch.no_grad():
             input_tensor = self.preprocess(image, alignment=self.alignment)  # torch.Size([1, 3, 48, 168])
-            outputs = self.model(input_tensor.to(self.device))  # classifier prediction
+            outputs = self.model(input_tensor)  # classifier prediction
             outputs = outputs.argmax(dim=2)  # torch.Size([1, 21, 78])
             outputs = outputs.cpu().detach().numpy()
         preb_labels = self.postprocess(outputs)

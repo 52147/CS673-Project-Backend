@@ -56,7 +56,7 @@ class YOLOv5(object):
         self.half &= self.device.type != 'cpu'  # half precision only supported on CUDA
         # Load model
         self.stride, self.names = 64, [f'class{i}' for i in range(1000)]  # assign defaults
-        self.model = attempt_load(weights, map_location=self.device)  # load FP32 model
+        self.model = attempt_load(weights, map_location=torch.device("cpu"))  # load FP32 model
         self.stride = int(self.model.stride.max())  # model stride
         # get class names
         if self.class_name:
@@ -86,7 +86,7 @@ class YOLOv5(object):
             # Convert
             input_image = input_image.transpose(2, 0, 1)  # HWC->CHW
 
-            input_image = torch.from_numpy(input_image).to(self.device)
+            input_image = torch.from_numpy(input_image)
             input_image = input_image.half() if self.half else input_image.float()  # uint8 to fp16/32
             input_image /= 255.0  # 0 - 255 to 0.0 - 1.0
             # input_image = input_image.  # expand for batch dim
