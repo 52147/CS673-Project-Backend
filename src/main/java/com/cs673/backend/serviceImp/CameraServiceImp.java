@@ -1,5 +1,8 @@
 package com.cs673.backend.serviceImp;
 
+import com.cs673.backend.controller.CheckController;
+import com.cs673.backend.controller.WebSocketController;
+import com.cs673.backend.entity.ParkInfo;
 import com.cs673.backend.service.CameraService;
 import jep.JepException;
 import org.opencv.core.Core;
@@ -19,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 public class CameraServiceImp implements CameraService {
     private VideoCapture capture;
     private ScheduledExecutorService scheduledExecutorService;
-
+    @Autowired
+    private CheckController checkController;
     @Autowired
     private YOLOService yoloService;
 
@@ -31,7 +35,7 @@ public class CameraServiceImp implements CameraService {
         }
 
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduleCaptureImage(0);
+        scheduleCaptureImage(10);
     }
 
     public void scheduleCaptureImage(long delayInSeconds) {
@@ -53,14 +57,22 @@ public class CameraServiceImp implements CameraService {
         try {
             long delay = 1;
             captureFrame();
-            String plate = yoloService.detectObjects("src/main/java/com/cs673/backend/image");
+            String plate = "gggg";//yoloService.detectObjects("src/main/java/com/cs673/backend/image");
             System.out.println(plate);
+            ParkInfo parkInfo = new ParkInfo();
+            parkInfo.setPlate(plate);
+            checkController.checkIn(parkInfo);
             if(plate.length() > 2) {
-                delay = 1;
+                delay = 8;
             }
             scheduleCaptureImage(delay);
+        /*
         } catch (JepException e) {
             System.err.println("Error in captureImage: " + e.getMessage());
+
+         */
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

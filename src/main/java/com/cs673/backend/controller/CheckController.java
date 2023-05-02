@@ -1,5 +1,6 @@
 package com.cs673.backend.controller;
 
+import com.cs673.backend.DTO.CheckData;
 import com.cs673.backend.entity.Garage;
 import com.cs673.backend.entity.MemberShip;
 import com.cs673.backend.entity.ParkForAll;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CheckController {
     @Autowired
     private ParkInfoService parkinfoservice;
@@ -35,32 +36,56 @@ public class CheckController {
     private AppointmentService appointmentService;
     private String bicyclePlate;
 
+    @Autowired
+    private WebSocketController webSocketController;
 
-    @PostMapping
-    @RequestMapping("/index/check/checkIn")
-    public Msg checkIn(@RequestBody ParkInfo data) {
-        System.out.println(data.getCarType());
+
+
+    public void checkIn(ParkInfo data){
+        String plate = data.getPlate();
+        CheckData checkData = new CheckData(plate, true);
+        /*
         if(data.getCarType().equals("bicycle")){
             data.setPlate(getBicyclePlate());
             bicyclePlate = data.getPlate();
         }
+         */
         Garage garage = garageService.findGarageData();
+
         if(checkEntrance(data.getPlate())) {
-            return Msg.success().add("Entrance", "false");
+            checkData.setEntrance(false);
+            System.out.println("It is exit");
+            try {
+                webSocketController.sendMessage(checkData);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return;
         }
         if(garage.getCurrent_spots() <= 0) {
-            return Msg.fail();
+            try {
+                webSocketController.sendMessage(null);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return;
         }
+
         if(checkOverdue(data)) {
             data.setMembership(true);
         }
         if(checkReservation(data)) {
             data.setReservation(true);
         }
+
         garage.setCurrent_spots(garage.getCurrent_spots() - 1);
         garageService.save(garage);
         parkinfoservice.saveParkInfo(data);
-        return Msg.success().add("Entrance", "true");
+        try {
+            webSocketController.sendMessage(checkData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PostMapping("/index/check/getBicyclePlate")
