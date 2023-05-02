@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class PasswordController {
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @RequestMapping("/forget")
     @PostMapping("")
