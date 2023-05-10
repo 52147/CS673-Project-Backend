@@ -11,6 +11,8 @@ public class ParkForAll implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
+    private  String carType;
+    @Column
     private String cardNum;
     @Column
     private int parkNum;
@@ -18,7 +20,7 @@ public class ParkForAll implements Serializable {
     private String plate;
     @Column
     private Date entrance;
-    @Column(name="exit_time")
+    @Column(name = "exit_time")
     private Date exit;
 
     @Column
@@ -58,6 +60,9 @@ public class ParkForAll implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getCarType(){return this.carType;}
+    public void setCarType(String carType){this.carType=carType;}
 
     public String getCardNum() {
         return cardNum;

@@ -9,15 +9,37 @@ public class ParkInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
+    private String carType;
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int parkNum;
     @Column(nullable = true)
     private String cardNum;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String plate;
     @Column(nullable = false)
     private Date entrance;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean membership = false;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean reservation = false;
+
+    public Boolean getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Boolean membership) {
+        this.membership = membership;
+    }
+
+    public Boolean getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Boolean reservation) {
+        this.reservation = reservation;
+    }
 
     public int getId() {
         return id;
@@ -26,6 +48,9 @@ public class ParkInfo implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getCarType(){return this.carType;}
+    public void setCarType(String carType){this.carType=carType;}
 
     public int getParkNum() {
         return parkNum;
